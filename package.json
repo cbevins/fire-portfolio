@@ -1,0 +1,48 @@
+{
+  "name": "fire-portfolio",
+  "version": "0.1.0",
+  "description": "A browser-based, single page application for creating charts, tables, and diagrams of wildland fire behavior based on the BehavePlus Wildland Fire Simulation System",
+  "author": "Collin D. Bevins <cbevins@montana.com>",
+  "license": "MIT",
+  "keywords": [
+    "wildland fire simulation",
+    "BehavePlus"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cbevins/fire-portfolio.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cbevins/fire-portfolio/issues"
+  },
+  "homepage": "https://github.com/cbevins/fire-portfolio#readme",
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "start": "sirv public"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^12.0.0",
+    "@rollup/plugin-json": "4.0.3",
+    "@rollup/plugin-node-resolve": "^8.0.0",
+    "eslint": "7.0.0",
+    "eslint-config-prettier": "6.11.0",
+    "eslint-config-standard": "14.1.1",
+    "eslint-plugin-import": "2.20.2",
+    "eslint-plugin-jest": "23.10.0",
+    "eslint-plugin-node": "11.1.0",
+    "eslint-plugin-promise": "4.2.1",
+    "eslint-plugin-react": "7.19.0",
+    "eslint-plugin-standard": "4.0.1",
+    "prettier-eslint": "9.0.1",
+    "prettier-eslint-cli": "5.0.0",
+    "rollup": "^2.3.4",
+    "rollup-plugin-livereload": "^1.0.0",
+    "rollup-plugin-svelte": "^5.0.3",
+    "rollup-plugin-terser": "^5.1.2",
+    "svelte": "^3.0.0"
+  },
+  "dependencies": {
+    "sirv-cli": "^0.4.4"
+  }
+}
