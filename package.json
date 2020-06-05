@@ -19,12 +19,25 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "start": "sirv public"
+    "start": "sirv public",
+    "lint": "eslint \"**/*.js\"",
+    "lint:fix": "prettier-eslint \"**/*.js\" --write",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "test:coveralls": "jest --testTimeout=10000 --runInBand --coverage && coveralls < coverage/lcov.info",
+    "test:watch": "jest --watch"
   },
   "devDependencies": {
+    "@babel/core": "7.9.6",
+    "@babel/preset-env": "7.9.6",
+    "@babel/preset-react": "7.9.4",
+    "@rollup/plugin-babel": "5.0.0",
     "@rollup/plugin-commonjs": "^12.0.0",
     "@rollup/plugin-json": "4.0.3",
     "@rollup/plugin-node-resolve": "^8.0.0",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-jest": "26.0.1",
+    "coveralls": "3.1.0",
     "eslint": "7.0.0",
     "eslint-config-prettier": "6.11.0",
     "eslint-config-standard": "14.1.1",
@@ -32,17 +45,45 @@
     "eslint-plugin-jest": "23.10.0",
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-promise": "4.2.1",
-    "eslint-plugin-react": "7.19.0",
     "eslint-plugin-standard": "4.0.1",
+    "jest": "26.0.1",
     "prettier-eslint": "9.0.1",
     "prettier-eslint-cli": "5.0.0",
+    "rimraf": "3.0.2",
     "rollup": "^2.3.4",
+    "rollup-plugin-babel": "4.4.0",
     "rollup-plugin-livereload": "^1.0.0",
     "rollup-plugin-svelte": "^5.0.3",
     "rollup-plugin-terser": "^5.1.2",
     "svelte": "^3.0.0"
   },
+  "jest": {
+    "transform": {
+      "^.+\\.[t|j]sx?$": "babel-jest",
+      "^.+\\.mjs?$": "babel-jest",
+      "^.+\\.js?$": "babel-jest"
+    },
+    "setupFilesAfterEnv": [
+      "./jest.setup.js"
+    ],
+    "testPathIgnorePatterns": [
+      "<rootDir>/archive"
+    ],
+    "collectCoverageFrom": [
+      "**/*.{js,jsx}",
+      "!**/index.js",
+      "!**/coverage/**",
+      "!**/dist/**",
+      "!**/node_modules/**",
+      "!**/utils/**",
+      "!**/vendor/**",
+      "!**/delayed__tests__/",
+      "!app.js",
+      "!rollup.config.js"
+    ]
+  },
   "dependencies": {
+    "behaveplus-core": "file:../behaveplus-core",
     "sirv-cli": "^0.4.4"
   }
 }
