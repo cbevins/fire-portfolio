@@ -1,21 +1,20 @@
 <script>
+  import { CustomInput } from "sveltestrap";
+
   // Properties passed in by the parent
   export let products;
   // Local data
+  let selector = 'moduleSelector'
   let data = products.requestModule();
-  let currentValue = products.module;
   let keys = Object.keys(data.options);
-  let value = currentValue
+  let inputValue = '?'
   // Callbacks
-  function setValue() {
-    products.setModule(value);
-    currentValue = products.module;
-  }
+  function setValue() { products.setModule(inputValue) }
 </script>
 
-<h2>{data.prompt} ({currentValue})</h2>
-<select bind:value={value} on:change={setValue}>
+<CustomInput type="select" id={selector} name={selector}
+    bind:value={inputValue} on:change={setValue}>
   {#each keys as key}
     <option value={key}>{data.options[key].label}</option>
   {/each}
-</select>
+</CustomInput>

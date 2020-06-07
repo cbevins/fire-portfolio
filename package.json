@@ -35,6 +35,9 @@
     "@rollup/plugin-commonjs": "^12.0.0",
     "@rollup/plugin-json": "4.0.3",
     "@rollup/plugin-node-resolve": "^8.0.0",
+    "@smui/common": "1.0.0-beta.21",
+    "@smui/drawer": "1.0.0-beta.21",
+    "@smui/list": "1.0.0-beta.21",
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "26.0.1",
     "coveralls": "3.1.0",
@@ -55,7 +58,8 @@
     "rollup-plugin-livereload": "^1.0.0",
     "rollup-plugin-svelte": "^5.0.3",
     "rollup-plugin-terser": "^5.1.2",
-    "svelte": "^3.0.0"
+    "svelte": "^3.0.0",
+    "sveltestrap": "3.3.3"
   },
   "jest": {
     "transform": {
@@ -84,6 +88,8 @@
   },
   "dependencies": {
     "behaveplus-core": "file:../behaveplus-core",
-    "sirv-cli": "^0.4.4"
+    "bootstrap": "4.5.0",
+    "sirv-cli": "^0.4.4",
+    "yootils": "0.0.16"
   }
 }

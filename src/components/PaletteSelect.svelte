@@ -1,21 +1,20 @@
 <script>
+  import { CustomInput } from "sveltestrap";
+
   // Properties passed in by the parent
   export let products;
   // Local data
+  let selector = 'paletteSelector'
   let data = products.requestPalette();
-  let currentValue = products.palette;
   let keys = Object.keys(data.options);
-  let value = currentValue
+  let inputValue = '?'
   // Callbacks
-  function setValue() {
-    products.setPalette(value);
-    currentValue = products.palette;
-  }
+  function setValue() { products.setPalette(inputValue) }
 </script>
 
-<h2>{data.prompt} ({currentValue})</h2>
-<select bind:value={value} on:change={setValue}>
+<CustomInput type="select" id={selector} name={selector}
+    bind:value={inputValue} on:change={setValue}>
   {#each keys as key}
     <option value={key}>{data.options[key].label}</option>
   {/each}
-</select>
+</CustomInput>

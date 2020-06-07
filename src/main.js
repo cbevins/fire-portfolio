@@ -1,10 +1,8 @@
-/** @format */
-
 import App from './App.svelte'
-// import { Products } from 'behaveplus-core'
-import { Product } from './products/Product.js'
+//import 'bootstrap/dist/css/bootstrap.min.css';
+import { Products } from 'behaveplus-core'
 
-const products = new Product()
+const products = new Products.Product()
 
 const app = new App({
   target: document.body,

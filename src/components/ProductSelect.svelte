@@ -1,21 +1,21 @@
 <script>
+  import { CustomInput } from "sveltestrap";
+  import { _product } from './stores.js'
   // Properties passed in by the parent
   export let products;
   // Local data
+  let selector = 'productSelector'
   let data = products.requestProduct();
-  let currentValue = products.product;
   let keys = Object.keys(data.options);
-  let value = currentValue
   // Callbacks
   function setValue() {
-    products.setProduct(value);
-    currentValue = products.product;
+    products.setProduct($_product)
   }
 </script>
 
-<h2>{data.prompt} ({currentValue})</h2>
-<select bind:value={value} on:change={setValue}>
+<CustomInput type="select" id={selector} name={selector}
+  bind:value={$_product} on:change={setValue}>
   {#each keys as key}
     <option value={key}>{data.options[key].label}</option>
   {/each}
-</select>
+</CustomInput>
