@@ -8,9 +8,7 @@
   let data = products.requestProduct();
   let keys = Object.keys(data.options);
   // Callbacks
-  function setValue() {
-    products.setProduct($_product)
-  }
+  function setValue() { products.setProduct($_product) }
 </script>
 
 <CustomInput type="select" id={selector} name={selector}

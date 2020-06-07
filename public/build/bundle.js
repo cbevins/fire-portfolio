@@ -5142,7 +5142,7 @@ var app = (function () {
     	return child_ctx;
     }
 
-    // (18:2) {#each keys as key}
+    // (16:2) {#each keys as key}
     function create_each_block$2(ctx) {
     	let option;
     	let t_value = /*data*/ ctx[2].options[/*key*/ ctx[7]].label + "";
@@ -5155,7 +5155,7 @@ var app = (function () {
     			t = text(t_value);
     			option.__value = option_value_value = /*key*/ ctx[7];
     			option.value = option.__value;
-    			add_location(option, file$c, 18, 4, 508);
+    			add_location(option, file$c, 16, 4, 502);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, option, anchor);
@@ -5171,14 +5171,14 @@ var app = (function () {
     		block,
     		id: create_each_block$2.name,
     		type: "each",
-    		source: "(18:2) {#each keys as key}",
+    		source: "(16:2) {#each keys as key}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (16:0) <CustomInput type="select" id={selector} name={selector}   bind:value={$_product} on:change={setValue}>
+    // (14:0) <CustomInput type="select" id={selector} name={selector}   bind:value={$_product} on:change={setValue}>
     function create_default_slot$2(ctx) {
     	let each_1_anchor;
     	let each_value = /*keys*/ ctx[3];
@@ -5239,7 +5239,7 @@ var app = (function () {
     		block,
     		id: create_default_slot$2.name,
     		type: "slot",
-    		source: "(16:0) <CustomInput type=\\\"select\\\" id={selector} name={selector}   bind:value={$_product} on:change={setValue}>",
+    		source: "(14:0) <CustomInput type=\\\"select\\\" id={selector} name={selector}   bind:value={$_product} on:change={setValue}>",
     		ctx
     	});
 
@@ -17518,7 +17518,7 @@ var app = (function () {
       return BpxVariantMap;
     }( /*#__PURE__*/_wrapNativeSuper(Map));
 
-    var ProductsList = ['graph', 'list', 'oneWay', 'twoWay', 'records', 'diagram', 'cases', 'timeSeries'];
+    var ProductsList = ['graph', 'table0Ranges', 'table1Range', 'table2Ranges', 'runRecords', 'diagram', 'caseComparison', 'timeSeries'];
     var VariablesList = {
       surfaceFire: {
         common: ['surface.weighted.fire.arithmeticMean.spreadRate', 'surface.weighted.fire.heading.fromUpslope', 'surface.primary.fuel.model.catalogKey'],
@@ -17562,7 +17562,7 @@ var app = (function () {
     var PaletteText = [['palette/label@en_US', 'Variable Palette'], ['palette/option=common/label@en_US', 'just the most commonly used variables'], ['palette/option=intermediate/label@en_US', 'commonly used PLUS more technical variables'], ['palette/option=advanced/label@en_US', 'commonly used, technical, PLUS advanced variables']];
     var SelectorText = [['selector.graph.x.variable/label@en_US', 'Graph X variable'], ['selector.graph.x.variable/option=range/label@en_US', 'Enter x-axis min and max values, and number of data points'], ['selector.graph.x.variable/option=menu/label@en_US', 'Select the x variable values'], ['selector.graph.y.variable/label@en_US', 'Graph Y variable'], ['selector.graph.z.variable/label@en_US', 'Graph Z variable']];
     var ModuleText = [['module/label@en_US', 'BehavePlus Module'], ['module/option=surfaceFire/label@en_US', 'Surface Fire'], ['module/option=fireEllipse/label@en_US', 'Fire Ellipse'], ['module/option=scorchHeight/label@en_US', 'Scorch Height'], ['module/option=treeMortality/label@en_US', 'Tree Mortality'], ['module/option=crownFire/label@en_US', 'Crown Fire'], ['module/option=spottingDistance/label@en_US', 'Spotting Distance'], ['module/option=ignitionProbability/label@en_US', 'Ignition Probability']];
-    var ProductText = [['product/label@en_US', 'Product'], ['product/option=graph/label@en_US', 'Graph'], ['product/option=list/label@en_US', 'Table with single values for all inputs and outputs'], ['product/option=oneWay/label@en_US', 'Table with output values for columns and 1 ranged input for rows'], ['product/option=twoWay/label@en_US', 'Table of output values for cells and 2 ranged inputs for rows and columns'], ['product/option=records/label@en_US', 'A set of data records'], ['product/option=diagram/label@en_US', 'A diagram'], ['product/option=cases/label@en_US', 'A set of case-wise comparisons'], ['product/option=timeSeries/label@en_US', 'A time series']];
+    var ProductText = [['product/label@en_US', 'Product'], ['product/option=graph/label@en_US', 'Graph'], ['product/option=table0Ranges/label@en_US', 'Table with no multi-valued inputs'], ['product/option=table1Range/label@en_US', 'Table with 1 multi-valued input'], ['product/option=table2Ranges/label@en_US', 'Table with 2 multi-valued inptus'], ['product/option=runRecords/label@en_US', 'Set of data records (any number of multi-valued inputs)'], ['product/option=diagram/label@en_US', 'A diagram'], ['product/option=caseComparison/label@en_US', 'A set of case-wise comparisons between discrete cases'], ['product/option=timeSeries/label@en_US', 'A table or graph of conditions over time']];
     var SurfaceFireText = [['surface.fire.ellipse.axis.lengthToWidthRatio/label@en_US', 'Fire Ellipse Length-toWidth Ratio'], ['surface.fire.ellipse.head.spreadRate/label@en_US', 'Spread Rate at Ellipse Head'], ['surface.fire.ellipse.head.firelineIntensity/label@en_US', 'Fireline Intensity at Ellipse Head'], ['surface.fire.ellipse.head.flameLength/label@en_US', 'Flame Length at Ellipse Head'], ['surface.fire.ellipse.head.scorchHeight/label@en_US', 'Scorch Height at Ellipse Head'], ['surface.fire.ellipse.head.spreadDistance/label@en_US', 'Spread Distance at Ellipse Head'], ['surface.fire.ellipse.head.treeMortality/label@en_US', 'Tree Mortality at Ellipse Head'], ['surface.fire.ellipse.axis.eccentricity/label@en_US', 'Fire Ellipse Eccentricity'], ['surface.primary.fuel.bed.packingRatio/label@en_US', 'Primary Fuel Bed Packing Ratio'], ['surface.primary.fuel.model.catalogKey', 'Primary Fuel Catalog Key'], ['surface.weighted.fire.arithmeticMean.spreadRate/label@en_US', 'Surface Fire Maximum Spread Rate'], ['surface.weighted.fire.heading.fromUpslope/label@en_US', 'Direction of Maximum Spread from Upslope'], ['surface.weighted.fire.heatPerUnitArea/label@en_US', 'Surface Fire Heat per Unit Area']];
     var SiteMoistureText = [['site.moisture.dead.tl1h/label@en_US', 'Dead 1-h Fuel Moisture'], ['site.moisture.dead.tl10h/label@en_US', 'Dead 10-h Fuel Moisture'], ['site.moisture.dead.tl100h/label@en_US', 'Dead 100-h Fuel Moisture'], ['site.moisture.live.herb/label@en_US', 'Live Herbaceous Fuel Moisture'], ['site.moisture.live.stem/label@en_US', 'Live Stem Fuel Moisture']];
     var ConfigureFuelText = [['configure.fuel.primary/label@en_US', 'Primary fuels are specified by entering'], ['configure.fuel.primary/option=catalog/label@en_US', 'a fuel catalog key'], ['configure.fuel.primary/option=behave/label@en_US', 'Behave fuel parameters'], ['configure.fuel.primary/option=chaparral/label@en_US', 'chaparral dynamic stand parameters'], ['configure.fuel.primary/option=palmettoGallberry/label@en_US', 'palmetto-gallberry dynamic stand parameters'], ['configure.fuel.primary/option=westernAspen/label@en_US', 'western aspen dynamic stand parameters'], ['configure.fuel.secondary/label@en_US', 'Secondary fuels are specified by entering'], ['configure.fuel.secondary/option=none/label@en_US', 'there is no secondary fuel'], ['configure.fuel.secondary/option=catalog/label@en_US', 'a fuel catalog key'], ['configure.fuel.secondary/option=behave/label@en_US', 'Behave fuel parameters'], ['configure.fuel.secondary/option=chaparral/label@en_US', 'chaparral dynamic stand parameters'], ['configure.fuel.secondary/option=palmettoGallberry/label@en_US', 'palmetto-gallberry dynamic stand parameters'], ['configure.fuel.secondary/option=westernAspen/label@en_US', 'western aspen dynamic stand parameters']];
