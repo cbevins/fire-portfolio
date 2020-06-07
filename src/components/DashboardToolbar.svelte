@@ -1,16 +1,22 @@
 <script>
-  import { _product } from './stores.js'
+  import { _product, _module, _palette } from './stores.js'
   export let title;
-  let p
-  $: p = $_product
+  let currentProduct, currentModule, currentPalette
+  $: currentProduct = $_product
+  $: currentModule = $_module
+  $: currentPalette = $_palette
 </script>
 
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-  <h1 class="h2">{title} {p}</h1>
+  <h1 class="h2">{title}</h1>
   <div class="btn-toolbar mb-2 mb-md-0">
     <div class="btn-group mr-2">
-      <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-      <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+      <button type="button" class="btn btn-sm btn-outline-secondary">
+        {currentProduct}</button>
+      <button type="button" class="btn btn-sm btn-outline-secondary">
+        {currentModule}</button>
+      <button type="button" class="btn btn-sm btn-outline-secondary">
+        {currentPalette}</button>
     </div>
     <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
       <span data-feather="calendar"></span>

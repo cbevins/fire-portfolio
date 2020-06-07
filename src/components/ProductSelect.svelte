@@ -12,7 +12,7 @@
 </script>
 
 <CustomInput type="select" id={selector} name={selector}
-  bind:value={$_product} on:change={setValue}>
+    bind:value={$_product} on:change={setValue}>
   {#each keys as key}
     <option value={key}>{data.options[key].label}</option>
   {/each}
