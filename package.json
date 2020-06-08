@@ -92,6 +92,7 @@
     "behaveplus-core": "file:../behaveplus-core",
     "bootstrap": "4.5.0",
     "sirv-cli": "^0.4.4",
+    "svelte-icons": "2.1.0",
     "yootils": "0.0.16"
   }
 }

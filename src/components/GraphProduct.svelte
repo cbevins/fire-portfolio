@@ -6,6 +6,7 @@
   import ProductSelect from "./ProductSelect.svelte";
   import CarList from "./Cars/List.svelte";
   import CarPage from "./Cars/Page.svelte";
+  import Tree from "./Tree/Tree.svelte";
 
   export let products
 
@@ -14,6 +15,7 @@
 </script>
 
 <Container>
+<Tree/>
     <CarList />
     <CarPage />
   <Row>
