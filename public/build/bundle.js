@@ -632,12 +632,18 @@ var app = (function () {
     function create_fragment$1(ctx) {
     	let nav;
     	let a0;
+    	let img;
+    	let img_src_value;
+    	let t0;
+    	let span0;
     	let t1;
-    	let button;
-    	let span;
     	let t2;
-    	let input;
+    	let button;
+    	let span1;
     	let t3;
+    	let h1;
+    	let t4;
+    	let t5;
     	let ul;
     	let li;
     	let a1;
@@ -646,22 +652,31 @@ var app = (function () {
     		c: function create() {
     			nav = element("nav");
     			a0 = element("a");
-    			a0.textContent = "Company name";
-    			t1 = space();
-    			button = element("button");
-    			span = element("span");
+    			img = element("img");
+    			t0 = space();
+    			span0 = element("span");
+    			t1 = text(/*company*/ ctx[0]);
     			t2 = space();
-    			input = element("input");
+    			button = element("button");
+    			span1 = element("span");
     			t3 = space();
+    			h1 = element("h1");
+    			t4 = text(/*title*/ ctx[2]);
+    			t5 = space();
     			ul = element("ul");
     			li = element("li");
     			a1 = element("a");
     			a1.textContent = "Sign out";
+    			if (img.src !== (img_src_value = /*logo*/ ctx[1])) attr_dev(img, "src", img_src_value);
+    			attr_dev(img, "alt", "SEM");
+    			add_location(img, file$1, 16, 4, 368);
+    			attr_dev(span0, "class", "title svelte-1912d0b");
+    			add_location(span0, file$1, 16, 32, 396);
     			attr_dev(a0, "class", "navbar-brand col-md-3 col-lg-2 mr-0 px-3");
-    			attr_dev(a0, "href", "#top");
-    			add_location(a0, file$1, 2, 2, 81);
-    			attr_dev(span, "class", "navbar-toggler-icon");
-    			add_location(span, file$1, 13, 4, 428);
+    			attr_dev(a0, "href", /*homePage*/ ctx[3]);
+    			add_location(a0, file$1, 15, 2, 295);
+    			attr_dev(span1, "class", "navbar-toggler-icon");
+    			add_location(span1, file$1, 27, 4, 753);
     			attr_dev(button, "class", "navbar-toggler position-absolute d-md-none collapsed");
     			attr_dev(button, "type", "button");
     			attr_dev(button, "data-toggle", "collapse");
@@ -669,21 +684,18 @@ var app = (function () {
     			attr_dev(button, "aria-controls", "sidebarMenu");
     			attr_dev(button, "aria-expanded", "false");
     			attr_dev(button, "aria-label", "Toggle navigation");
-    			add_location(button, file$1, 6, 2, 173);
-    			attr_dev(input, "class", "form-control form-control-dark w-100");
-    			attr_dev(input, "type", "text");
-    			attr_dev(input, "placeholder", "Search");
-    			attr_dev(input, "aria-label", "Search");
-    			add_location(input, file$1, 16, 2, 485);
+    			add_location(button, file$1, 20, 2, 498);
+    			attr_dev(h1, "class", "svelte-1912d0b");
+    			add_location(h1, file$1, 30, 2, 810);
     			attr_dev(a1, "class", "nav-link");
     			attr_dev(a1, "href", "#top");
-    			add_location(a1, file$1, 23, 6, 679);
+    			add_location(a1, file$1, 40, 6, 1032);
     			attr_dev(li, "class", "nav-item text-nowrap");
-    			add_location(li, file$1, 22, 4, 639);
+    			add_location(li, file$1, 39, 4, 992);
     			attr_dev(ul, "class", "navbar-nav px-3");
-    			add_location(ul, file$1, 21, 2, 606);
+    			add_location(ul, file$1, 38, 2, 959);
     			attr_dev(nav, "class", "navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow");
-    			add_location(nav, file$1, 0, 0, 0);
+    			add_location(nav, file$1, 12, 0, 163);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -691,17 +703,34 @@ var app = (function () {
     		m: function mount(target, anchor) {
     			insert_dev(target, nav, anchor);
     			append_dev(nav, a0);
-    			append_dev(nav, t1);
-    			append_dev(nav, button);
-    			append_dev(button, span);
+    			append_dev(a0, img);
+    			append_dev(a0, t0);
+    			append_dev(a0, span0);
+    			append_dev(span0, t1);
     			append_dev(nav, t2);
-    			append_dev(nav, input);
+    			append_dev(nav, button);
+    			append_dev(button, span1);
     			append_dev(nav, t3);
+    			append_dev(nav, h1);
+    			append_dev(h1, t4);
+    			append_dev(nav, t5);
     			append_dev(nav, ul);
     			append_dev(ul, li);
     			append_dev(li, a1);
     		},
-    		p: noop,
+    		p: function update(ctx, [dirty]) {
+    			if (dirty & /*logo*/ 2 && img.src !== (img_src_value = /*logo*/ ctx[1])) {
+    				attr_dev(img, "src", img_src_value);
+    			}
+
+    			if (dirty & /*company*/ 1) set_data_dev(t1, /*company*/ ctx[0]);
+
+    			if (dirty & /*homePage*/ 8) {
+    				attr_dev(a0, "href", /*homePage*/ ctx[3]);
+    			}
+
+    			if (dirty & /*title*/ 4) set_data_dev(t4, /*title*/ ctx[2]);
+    		},
     		i: noop,
     		o: noop,
     		d: function destroy(detaching) {
@@ -720,8 +749,13 @@ var app = (function () {
     	return block;
     }
 
-    function instance$1($$self, $$props) {
-    	const writable_props = [];
+    function instance$1($$self, $$props, $$invalidate) {
+    	let { company } = $$props,
+    		{ logo } = $$props,
+    		{ title } = $$props,
+    		{ homePage } = $$props;
+
+    	const writable_props = ["company", "logo", "title", "homePage"];
 
     	Object.keys($$props).forEach(key => {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<Navbar> was created with unknown prop '${key}'`);
@@ -729,13 +763,40 @@ var app = (function () {
 
     	let { $$slots = {}, $$scope } = $$props;
     	validate_slots("Navbar", $$slots, []);
-    	return [];
+
+    	$$self.$set = $$props => {
+    		if ("company" in $$props) $$invalidate(0, company = $$props.company);
+    		if ("logo" in $$props) $$invalidate(1, logo = $$props.logo);
+    		if ("title" in $$props) $$invalidate(2, title = $$props.title);
+    		if ("homePage" in $$props) $$invalidate(3, homePage = $$props.homePage);
+    	};
+
+    	$$self.$capture_state = () => ({ company, logo, title, homePage });
+
+    	$$self.$inject_state = $$props => {
+    		if ("company" in $$props) $$invalidate(0, company = $$props.company);
+    		if ("logo" in $$props) $$invalidate(1, logo = $$props.logo);
+    		if ("title" in $$props) $$invalidate(2, title = $$props.title);
+    		if ("homePage" in $$props) $$invalidate(3, homePage = $$props.homePage);
+    	};
+
+    	if ($$props && "$$inject" in $$props) {
+    		$$self.$inject_state($$props.$$inject);
+    	}
+
+    	return [company, logo, title, homePage];
     }
 
     class Navbar extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$1, create_fragment$1, safe_not_equal, {});
+
+    		init(this, options, instance$1, create_fragment$1, safe_not_equal, {
+    			company: 0,
+    			logo: 1,
+    			title: 2,
+    			homePage: 3
+    		});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
@@ -743,6 +804,57 @@ var app = (function () {
     			options,
     			id: create_fragment$1.name
     		});
+
+    		const { ctx } = this.$$;
+    		const props = options.props || {};
+
+    		if (/*company*/ ctx[0] === undefined && !("company" in props)) {
+    			console.warn("<Navbar> was created without expected prop 'company'");
+    		}
+
+    		if (/*logo*/ ctx[1] === undefined && !("logo" in props)) {
+    			console.warn("<Navbar> was created without expected prop 'logo'");
+    		}
+
+    		if (/*title*/ ctx[2] === undefined && !("title" in props)) {
+    			console.warn("<Navbar> was created without expected prop 'title'");
+    		}
+
+    		if (/*homePage*/ ctx[3] === undefined && !("homePage" in props)) {
+    			console.warn("<Navbar> was created without expected prop 'homePage'");
+    		}
+    	}
+
+    	get company() {
+    		throw new Error("<Navbar>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set company(value) {
+    		throw new Error("<Navbar>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get logo() {
+    		throw new Error("<Navbar>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set logo(value) {
+    		throw new Error("<Navbar>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get title() {
+    		throw new Error("<Navbar>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set title(value) {
+    		throw new Error("<Navbar>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get homePage() {
+    		throw new Error("<Navbar>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set homePage(value) {
+    		throw new Error("<Navbar>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
     }
 
@@ -1972,95 +2084,83 @@ var app = (function () {
 
     function create_fragment$4(ctx) {
     	let div2;
-    	let h1;
-    	let t0;
-    	let t1;
     	let div1;
     	let div0;
     	let button0;
+    	let t0;
+    	let t1;
+    	let button1;
     	let t2;
     	let t3;
-    	let button1;
+    	let button2;
     	let t4;
     	let t5;
-    	let button2;
-    	let t6;
-    	let t7;
     	let button3;
     	let span;
-    	let t8;
+    	let t6;
 
     	const block = {
     		c: function create() {
     			div2 = element("div");
-    			h1 = element("h1");
-    			t0 = text(/*title*/ ctx[0]);
-    			t1 = space();
     			div1 = element("div");
     			div0 = element("div");
     			button0 = element("button");
-    			t2 = text(/*currentProduct*/ ctx[1]);
-    			t3 = space();
+    			t0 = text(/*currentProduct*/ ctx[0]);
+    			t1 = space();
     			button1 = element("button");
-    			t4 = text(/*currentModule*/ ctx[2]);
-    			t5 = space();
+    			t2 = text(/*currentModule*/ ctx[1]);
+    			t3 = space();
     			button2 = element("button");
-    			t6 = text(/*currentPalette*/ ctx[3]);
-    			t7 = space();
+    			t4 = text(/*currentPalette*/ ctx[2]);
+    			t5 = space();
     			button3 = element("button");
     			span = element("span");
-    			t8 = text("\n      This week");
-    			attr_dev(h1, "class", "h2");
-    			add_location(h1, file$4, 10, 2, 377);
+    			t6 = text("\n      This week");
     			attr_dev(button0, "type", "button");
     			attr_dev(button0, "class", "btn btn-sm btn-outline-secondary");
-    			add_location(button0, file$4, 13, 6, 485);
+    			add_location(button0, file$4, 12, 6, 436);
     			attr_dev(button1, "type", "button");
     			attr_dev(button1, "class", "btn btn-sm btn-outline-secondary");
-    			add_location(button1, file$4, 15, 6, 589);
+    			add_location(button1, file$4, 14, 6, 540);
     			attr_dev(button2, "type", "button");
     			attr_dev(button2, "class", "btn btn-sm btn-outline-secondary");
-    			add_location(button2, file$4, 17, 6, 692);
+    			add_location(button2, file$4, 16, 6, 643);
     			attr_dev(div0, "class", "btn-group mr-2");
-    			add_location(div0, file$4, 12, 4, 450);
+    			add_location(div0, file$4, 11, 4, 401);
     			attr_dev(span, "data-feather", "calendar");
-    			add_location(span, file$4, 21, 6, 891);
+    			add_location(span, file$4, 20, 6, 842);
     			attr_dev(button3, "type", "button");
     			attr_dev(button3, "class", "btn btn-sm btn-outline-secondary dropdown-toggle");
-    			add_location(button3, file$4, 20, 4, 805);
+    			add_location(button3, file$4, 19, 4, 756);
     			attr_dev(div1, "class", "btn-toolbar mb-2 mb-md-0");
-    			add_location(div1, file$4, 11, 2, 407);
+    			add_location(div1, file$4, 10, 2, 358);
     			attr_dev(div2, "class", "d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom");
-    			add_location(div2, file$4, 9, 0, 257);
+    			add_location(div2, file$4, 9, 0, 238);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div2, anchor);
-    			append_dev(div2, h1);
-    			append_dev(h1, t0);
-    			append_dev(div2, t1);
     			append_dev(div2, div1);
     			append_dev(div1, div0);
     			append_dev(div0, button0);
-    			append_dev(button0, t2);
-    			append_dev(div0, t3);
+    			append_dev(button0, t0);
+    			append_dev(div0, t1);
     			append_dev(div0, button1);
-    			append_dev(button1, t4);
-    			append_dev(div0, t5);
+    			append_dev(button1, t2);
+    			append_dev(div0, t3);
     			append_dev(div0, button2);
-    			append_dev(button2, t6);
-    			append_dev(div1, t7);
+    			append_dev(button2, t4);
+    			append_dev(div1, t5);
     			append_dev(div1, button3);
     			append_dev(button3, span);
-    			append_dev(button3, t8);
+    			append_dev(button3, t6);
     		},
     		p: function update(ctx, [dirty]) {
-    			if (dirty & /*title*/ 1) set_data_dev(t0, /*title*/ ctx[0]);
-    			if (dirty & /*currentProduct*/ 2) set_data_dev(t2, /*currentProduct*/ ctx[1]);
-    			if (dirty & /*currentModule*/ 4) set_data_dev(t4, /*currentModule*/ ctx[2]);
-    			if (dirty & /*currentPalette*/ 8) set_data_dev(t6, /*currentPalette*/ ctx[3]);
+    			if (dirty & /*currentProduct*/ 1) set_data_dev(t0, /*currentProduct*/ ctx[0]);
+    			if (dirty & /*currentModule*/ 2) set_data_dev(t2, /*currentModule*/ ctx[1]);
+    			if (dirty & /*currentPalette*/ 4) set_data_dev(t4, /*currentPalette*/ ctx[2]);
     		},
     		i: noop,
     		o: noop,
@@ -2085,14 +2185,13 @@ var app = (function () {
     	let $_module;
     	let $_palette;
     	validate_store(_product, "_product");
-    	component_subscribe($$self, _product, $$value => $$invalidate(4, $_product = $$value));
+    	component_subscribe($$self, _product, $$value => $$invalidate(3, $_product = $$value));
     	validate_store(_module, "_module");
-    	component_subscribe($$self, _module, $$value => $$invalidate(5, $_module = $$value));
+    	component_subscribe($$self, _module, $$value => $$invalidate(4, $_module = $$value));
     	validate_store(_palette, "_palette");
-    	component_subscribe($$self, _palette, $$value => $$invalidate(6, $_palette = $$value));
-    	let { title } = $$props;
+    	component_subscribe($$self, _palette, $$value => $$invalidate(5, $_palette = $$value));
     	let currentProduct, currentModule, currentPalette;
-    	const writable_props = ["title"];
+    	const writable_props = [];
 
     	Object.keys($$props).forEach(key => {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<Toolbar> was created with unknown prop '${key}'`);
@@ -2101,15 +2200,10 @@ var app = (function () {
     	let { $$slots = {}, $$scope } = $$props;
     	validate_slots("Toolbar", $$slots, []);
 
-    	$$self.$set = $$props => {
-    		if ("title" in $$props) $$invalidate(0, title = $$props.title);
-    	};
-
     	$$self.$capture_state = () => ({
     		_product,
     		_module,
     		_palette,
-    		title,
     		currentProduct,
     		currentModule,
     		currentPalette,
@@ -2119,10 +2213,9 @@ var app = (function () {
     	});
 
     	$$self.$inject_state = $$props => {
-    		if ("title" in $$props) $$invalidate(0, title = $$props.title);
-    		if ("currentProduct" in $$props) $$invalidate(1, currentProduct = $$props.currentProduct);
-    		if ("currentModule" in $$props) $$invalidate(2, currentModule = $$props.currentModule);
-    		if ("currentPalette" in $$props) $$invalidate(3, currentPalette = $$props.currentPalette);
+    		if ("currentProduct" in $$props) $$invalidate(0, currentProduct = $$props.currentProduct);
+    		if ("currentModule" in $$props) $$invalidate(1, currentModule = $$props.currentModule);
+    		if ("currentPalette" in $$props) $$invalidate(2, currentPalette = $$props.currentPalette);
     	};
 
     	if ($$props && "$$inject" in $$props) {
@@ -2130,26 +2223,26 @@ var app = (function () {
     	}
 
     	$$self.$$.update = () => {
-    		if ($$self.$$.dirty & /*$_product*/ 16) {
-    			 $$invalidate(1, currentProduct = $_product);
+    		if ($$self.$$.dirty & /*$_product*/ 8) {
+    			 $$invalidate(0, currentProduct = $_product);
     		}
 
-    		if ($$self.$$.dirty & /*$_module*/ 32) {
-    			 $$invalidate(2, currentModule = $_module);
+    		if ($$self.$$.dirty & /*$_module*/ 16) {
+    			 $$invalidate(1, currentModule = $_module);
     		}
 
-    		if ($$self.$$.dirty & /*$_palette*/ 64) {
-    			 $$invalidate(3, currentPalette = $_palette);
+    		if ($$self.$$.dirty & /*$_palette*/ 32) {
+    			 $$invalidate(2, currentPalette = $_palette);
     		}
     	};
 
-    	return [title, currentProduct, currentModule, currentPalette];
+    	return [currentProduct, currentModule, currentPalette];
     }
 
     class Toolbar extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$4, create_fragment$4, safe_not_equal, { title: 0 });
+    		init(this, options, instance$4, create_fragment$4, safe_not_equal, {});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
@@ -2157,21 +2250,6 @@ var app = (function () {
     			options,
     			id: create_fragment$4.name
     		});
-
-    		const { ctx } = this.$$;
-    		const props = options.props || {};
-
-    		if (/*title*/ ctx[0] === undefined && !("title" in props)) {
-    			console.warn("<Toolbar> was created without expected prop 'title'");
-    		}
-    	}
-
-    	get title() {
-    		throw new Error("<Toolbar>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
-    	}
-
-    	set title(value) {
-    		throw new Error("<Toolbar>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
     }
 
@@ -8242,16 +8320,23 @@ var app = (function () {
     	let t3;
     	let t4;
     	let current;
-    	const dashboardnavbar = new Navbar({ $$inline: true });
-    	const dashboardsidebar = new Sidebar({ $$inline: true });
 
-    	const dashboardtoolbar = new Toolbar({
-    			props: { title: /*title*/ ctx[0] },
+    	const dashboardnavbar = new Navbar({
+    			props: {
+    				logo: /*logo*/ ctx[4],
+    				company: /*company*/ ctx[3],
+    				title: /*title*/ ctx[0],
+    				author: /*author*/ ctx[1],
+    				homePage: /*homePage*/ ctx[5]
+    			},
     			$$inline: true
     		});
 
+    	const dashboardsidebar = new Sidebar({ $$inline: true });
+    	const dashboardtoolbar = new Toolbar({ $$inline: true });
+
     	const graphproduct = new GraphProduct({
-    			props: { products: /*products*/ ctx[1] },
+    			props: { products: /*products*/ ctx[2] },
     			$$inline: true
     		});
 
@@ -8276,11 +8361,11 @@ var app = (function () {
     			create_component(dashboardtable.$$.fragment);
     			attr_dev(main, "role", "main");
     			attr_dev(main, "class", "col-md-9 ml-sm-auto col-lg-10 px-md-4");
-    			add_location(main, file$i, 14, 4, 439);
+    			add_location(main, file$i, 16, 4, 635);
     			attr_dev(div0, "class", "row");
-    			add_location(div0, file$i, 12, 2, 393);
+    			add_location(div0, file$i, 14, 2, 589);
     			attr_dev(div1, "class", "container-fluid");
-    			add_location(div1, file$i, 11, 0, 361);
+    			add_location(div1, file$i, 13, 0, 557);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -8303,11 +8388,15 @@ var app = (function () {
     			current = true;
     		},
     		p: function update(ctx, [dirty]) {
-    			const dashboardtoolbar_changes = {};
-    			if (dirty & /*title*/ 1) dashboardtoolbar_changes.title = /*title*/ ctx[0];
-    			dashboardtoolbar.$set(dashboardtoolbar_changes);
+    			const dashboardnavbar_changes = {};
+    			if (dirty & /*logo*/ 16) dashboardnavbar_changes.logo = /*logo*/ ctx[4];
+    			if (dirty & /*company*/ 8) dashboardnavbar_changes.company = /*company*/ ctx[3];
+    			if (dirty & /*title*/ 1) dashboardnavbar_changes.title = /*title*/ ctx[0];
+    			if (dirty & /*author*/ 2) dashboardnavbar_changes.author = /*author*/ ctx[1];
+    			if (dirty & /*homePage*/ 32) dashboardnavbar_changes.homePage = /*homePage*/ ctx[5];
+    			dashboardnavbar.$set(dashboardnavbar_changes);
     			const graphproduct_changes = {};
-    			if (dirty & /*products*/ 2) graphproduct_changes.products = /*products*/ ctx[1];
+    			if (dirty & /*products*/ 4) graphproduct_changes.products = /*products*/ ctx[2];
     			graphproduct.$set(graphproduct_changes);
     		},
     		i: function intro(local) {
@@ -8353,8 +8442,14 @@ var app = (function () {
     }
 
     function instance$k($$self, $$props, $$invalidate) {
-    	let { title } = $$props, { products } = $$props;
-    	const writable_props = ["title", "products"];
+    	let { title } = $$props,
+    		{ author } = $$props,
+    		{ products } = $$props,
+    		{ company } = $$props,
+    		{ logo } = $$props,
+    		{ homePage } = $$props;
+
+    	const writable_props = ["title", "author", "products", "company", "logo", "homePage"];
 
     	Object.keys($$props).forEach(key => {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<Dashboard> was created with unknown prop '${key}'`);
@@ -8365,7 +8460,11 @@ var app = (function () {
 
     	$$self.$set = $$props => {
     		if ("title" in $$props) $$invalidate(0, title = $$props.title);
-    		if ("products" in $$props) $$invalidate(1, products = $$props.products);
+    		if ("author" in $$props) $$invalidate(1, author = $$props.author);
+    		if ("products" in $$props) $$invalidate(2, products = $$props.products);
+    		if ("company" in $$props) $$invalidate(3, company = $$props.company);
+    		if ("logo" in $$props) $$invalidate(4, logo = $$props.logo);
+    		if ("homePage" in $$props) $$invalidate(5, homePage = $$props.homePage);
     	};
 
     	$$self.$capture_state = () => ({
@@ -8376,25 +8475,41 @@ var app = (function () {
     		DashboardToolbar: Toolbar,
     		GraphProduct,
     		title,
-    		products
+    		author,
+    		products,
+    		company,
+    		logo,
+    		homePage
     	});
 
     	$$self.$inject_state = $$props => {
     		if ("title" in $$props) $$invalidate(0, title = $$props.title);
-    		if ("products" in $$props) $$invalidate(1, products = $$props.products);
+    		if ("author" in $$props) $$invalidate(1, author = $$props.author);
+    		if ("products" in $$props) $$invalidate(2, products = $$props.products);
+    		if ("company" in $$props) $$invalidate(3, company = $$props.company);
+    		if ("logo" in $$props) $$invalidate(4, logo = $$props.logo);
+    		if ("homePage" in $$props) $$invalidate(5, homePage = $$props.homePage);
     	};
 
     	if ($$props && "$$inject" in $$props) {
     		$$self.$inject_state($$props.$$inject);
     	}
 
-    	return [title, products];
+    	return [title, author, products, company, logo, homePage];
     }
 
     class Dashboard extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$k, create_fragment$k, safe_not_equal, { title: 0, products: 1 });
+
+    		init(this, options, instance$k, create_fragment$k, safe_not_equal, {
+    			title: 0,
+    			author: 1,
+    			products: 2,
+    			company: 3,
+    			logo: 4,
+    			homePage: 5
+    		});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
@@ -8410,8 +8525,24 @@ var app = (function () {
     			console.warn("<Dashboard> was created without expected prop 'title'");
     		}
 
-    		if (/*products*/ ctx[1] === undefined && !("products" in props)) {
+    		if (/*author*/ ctx[1] === undefined && !("author" in props)) {
+    			console.warn("<Dashboard> was created without expected prop 'author'");
+    		}
+
+    		if (/*products*/ ctx[2] === undefined && !("products" in props)) {
     			console.warn("<Dashboard> was created without expected prop 'products'");
+    		}
+
+    		if (/*company*/ ctx[3] === undefined && !("company" in props)) {
+    			console.warn("<Dashboard> was created without expected prop 'company'");
+    		}
+
+    		if (/*logo*/ ctx[4] === undefined && !("logo" in props)) {
+    			console.warn("<Dashboard> was created without expected prop 'logo'");
+    		}
+
+    		if (/*homePage*/ ctx[5] === undefined && !("homePage" in props)) {
+    			console.warn("<Dashboard> was created without expected prop 'homePage'");
     		}
     	}
 
@@ -8423,11 +8554,43 @@ var app = (function () {
     		throw new Error("<Dashboard>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
 
+    	get author() {
+    		throw new Error("<Dashboard>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set author(value) {
+    		throw new Error("<Dashboard>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
     	get products() {
     		throw new Error("<Dashboard>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
 
     	set products(value) {
+    		throw new Error("<Dashboard>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get company() {
+    		throw new Error("<Dashboard>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set company(value) {
+    		throw new Error("<Dashboard>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get logo() {
+    		throw new Error("<Dashboard>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set logo(value) {
+    		throw new Error("<Dashboard>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get homePage() {
+    		throw new Error("<Dashboard>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set homePage(value) {
     		throw new Error("<Dashboard>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
     }
@@ -8760,7 +8923,10 @@ var app = (function () {
     			props: {
     				title: /*title*/ ctx[0],
     				author: /*author*/ ctx[1],
-    				products: /*products*/ ctx[2]
+    				products: /*products*/ ctx[2],
+    				company: /*company*/ ctx[3],
+    				logo: /*logo*/ ctx[4],
+    				homePage: /*homePage*/ ctx[5]
     			},
     			$$inline: true
     		});
@@ -8781,6 +8947,9 @@ var app = (function () {
     			if (dirty & /*title*/ 1) dashboard_changes.title = /*title*/ ctx[0];
     			if (dirty & /*author*/ 2) dashboard_changes.author = /*author*/ ctx[1];
     			if (dirty & /*products*/ 4) dashboard_changes.products = /*products*/ ctx[2];
+    			if (dirty & /*company*/ 8) dashboard_changes.company = /*company*/ ctx[3];
+    			if (dirty & /*logo*/ 16) dashboard_changes.logo = /*logo*/ ctx[4];
+    			if (dirty & /*homePage*/ 32) dashboard_changes.homePage = /*homePage*/ ctx[5];
     			dashboard.$set(dashboard_changes);
     		},
     		i: function intro(local) {
@@ -8809,10 +8978,14 @@ var app = (function () {
     }
 
     function instance$n($$self, $$props, $$invalidate) {
-    	let { title } = $$props;
-    	let { author } = $$props;
-    	let { products } = $$props;
-    	const writable_props = ["title", "author", "products"];
+    	let { title } = $$props,
+    		{ author } = $$props,
+    		{ products } = $$props,
+    		{ company } = $$props,
+    		{ logo } = $$props,
+    		{ homePage } = $$props;
+
+    	const writable_props = ["title", "author", "products", "company", "logo", "homePage"];
 
     	Object.keys($$props).forEach(key => {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<App> was created with unknown prop '${key}'`);
@@ -8825,33 +8998,50 @@ var app = (function () {
     		if ("title" in $$props) $$invalidate(0, title = $$props.title);
     		if ("author" in $$props) $$invalidate(1, author = $$props.author);
     		if ("products" in $$props) $$invalidate(2, products = $$props.products);
+    		if ("company" in $$props) $$invalidate(3, company = $$props.company);
+    		if ("logo" in $$props) $$invalidate(4, logo = $$props.logo);
+    		if ("homePage" in $$props) $$invalidate(5, homePage = $$props.homePage);
     	};
 
     	$$self.$capture_state = () => ({
+    		Dashboard,
+    		Welcome,
     		title,
     		author,
     		products,
-    		Dashboard,
-    		Welcome
+    		company,
+    		logo,
+    		homePage
     	});
 
     	$$self.$inject_state = $$props => {
     		if ("title" in $$props) $$invalidate(0, title = $$props.title);
     		if ("author" in $$props) $$invalidate(1, author = $$props.author);
     		if ("products" in $$props) $$invalidate(2, products = $$props.products);
+    		if ("company" in $$props) $$invalidate(3, company = $$props.company);
+    		if ("logo" in $$props) $$invalidate(4, logo = $$props.logo);
+    		if ("homePage" in $$props) $$invalidate(5, homePage = $$props.homePage);
     	};
 
     	if ($$props && "$$inject" in $$props) {
     		$$self.$inject_state($$props.$$inject);
     	}
 
-    	return [title, author, products];
+    	return [title, author, products, company, logo, homePage];
     }
 
     class App extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$n, create_fragment$n, safe_not_equal, { title: 0, author: 1, products: 2 });
+
+    		init(this, options, instance$n, create_fragment$n, safe_not_equal, {
+    			title: 0,
+    			author: 1,
+    			products: 2,
+    			company: 3,
+    			logo: 4,
+    			homePage: 5
+    		});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
@@ -8873,6 +9063,18 @@ var app = (function () {
 
     		if (/*products*/ ctx[2] === undefined && !("products" in props)) {
     			console.warn("<App> was created without expected prop 'products'");
+    		}
+
+    		if (/*company*/ ctx[3] === undefined && !("company" in props)) {
+    			console.warn("<App> was created without expected prop 'company'");
+    		}
+
+    		if (/*logo*/ ctx[4] === undefined && !("logo" in props)) {
+    			console.warn("<App> was created without expected prop 'logo'");
+    		}
+
+    		if (/*homePage*/ ctx[5] === undefined && !("homePage" in props)) {
+    			console.warn("<App> was created without expected prop 'homePage'");
     		}
     	}
 
@@ -8897,6 +9099,30 @@ var app = (function () {
     	}
 
     	set products(value) {
+    		throw new Error("<App>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get company() {
+    		throw new Error("<App>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set company(value) {
+    		throw new Error("<App>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get logo() {
+    		throw new Error("<App>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set logo(value) {
+    		throw new Error("<App>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get homePage() {
+    		throw new Error("<App>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set homePage(value) {
     		throw new Error("<App>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
     }
@@ -19951,7 +20177,10 @@ var app = (function () {
       props: {
         products: products,
         title: 'Wildland Fire Portfolio',
-        author: 'Collin D Bevins'
+        author: 'Collin D Bevins',
+        company: 'SEM',
+        logo: "favicon.sem.png",
+        homePage: "http://fire.org"
       }
     });
 

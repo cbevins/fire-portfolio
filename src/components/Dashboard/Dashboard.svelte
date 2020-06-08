@@ -5,15 +5,17 @@
   import DashboardTable from './Table.svelte'
   import DashboardToolbar from './Toolbar.svelte'
   import GraphProduct from "../GraphProduct.svelte";
-  export let title, products
+  // Note that 'export' actually declares the props being passed
+  // INTO into this component by its parent/client.
+  export let title, author, products, company, logo, homePage
 </script>
 
-<DashboardNavbar/>
+<DashboardNavbar {logo} {company} {title} {author} {homePage} />
 <div class="container-fluid">
   <div class="row">
     <DashboardSidebar/>
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
-      <DashboardToolbar {title}/>
+      <DashboardToolbar/>
       <GraphProduct {products} />
       <DashboardChart/>
       <DashboardTable/>

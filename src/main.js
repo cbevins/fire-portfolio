@@ -9,7 +9,10 @@ const app = new App({
   props: {
     products: products,
     title: 'Wildland Fire Portfolio',
-    author: 'Collin D Bevins'
+    author: 'Collin D Bevins',
+    company: 'SEM',
+    logo: "favicon.sem.png",
+    homePage: "http://fire.org"
   }
 })
 
