@@ -4,9 +4,6 @@
   import ModuleSelect from "./ModuleSelect.svelte";
   import PaletteSelect from "./PaletteSelect.svelte";
   import ProductSelect from "./ProductSelect.svelte";
-  import CarList from "./Cars/List.svelte";
-  import CarPage from "./Cars/Page.svelte";
-  import Tree from "./Tree/Tree.svelte";
 
   export let products
 
@@ -15,9 +12,6 @@
 </script>
 
 <Container>
-<Tree/>
-    <CarList />
-    <CarPage />
   <Row>
       <Col xs="3">Product</Col>
       <Col xs="8"><ProductSelect {products} /></Col>

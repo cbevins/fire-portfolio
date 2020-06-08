@@ -1,9 +1,11 @@
 <script>
-	import File from './File.svelte';
+	import Leaf from './Leaf.svelte';
+  import FaPlusCircle from 'svelte-icons/fa/FaPlusCircle.svelte'
+  import FaMinusCircle from 'svelte-icons/fa/FaMinusCircle.svelte'
 
 	export let expanded = false;
-	export let name;
-	export let files;
+	export let label;
+	export let items;
 
 	function toggle() {
 		expanded = !expanded;
@@ -35,16 +37,16 @@
 	}
 </style>
 
-<span class:expanded on:click={toggle}>{name}</span>
+<span class:expanded on:click={toggle}>{label}</span>
 
 {#if expanded}
 	<ul>
-		{#each files as file}
+		{#each items as item}
 			<li>
-				{#if file.type === 'folder'}
-					<svelte:self {...file}/>
+				{#if item.type === 'container'}
+					<svelte:self {...item}/>
 				{:else}
-					<File {...file}/>
+					<Leaf {...item}/>
 				{/if}
 			</li>
 		{/each}
