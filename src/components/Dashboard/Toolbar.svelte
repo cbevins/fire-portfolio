@@ -1,5 +1,5 @@
 <script>
-  import { _product, _module, _palette } from './stores.js'
+  import { _product, _module, _palette } from '../../stores/stores.js'
   export let title;
   let currentProduct, currentModule, currentPalette
   $: currentProduct = $_product

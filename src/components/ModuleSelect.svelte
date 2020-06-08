@@ -1,6 +1,6 @@
 <script>
   import { CustomInput } from "sveltestrap";
-  import { _module } from './stores.js'
+  import { _module } from '../stores/stores.js'
   // Properties passed in by the parent
   export let products;
   // Local data

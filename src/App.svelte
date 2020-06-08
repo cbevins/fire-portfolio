@@ -8,8 +8,8 @@
   export let author;
   export let products;
 
-  import Dashboard from './components/Dashboard.svelte'
-  import Welcome from "./components/Welcome.svelte";
+  import Dashboard from './components/Dashboard/Dashboard.svelte'
+  import Welcome from "./components/Other/Welcome.svelte";
 </script>
 
 <Dashboard {title} {author} {products} />

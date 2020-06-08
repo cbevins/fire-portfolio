@@ -7,6 +7,7 @@
   "extends": [
     "plugin:react/recommended",
     "plugin:jest/recommended",
+    "eslint:recommended",
     "standard"
   ],
   "globals": {
@@ -17,9 +18,15 @@
     "ecmaFeatures": {
       "jsx": true
     },
-    "ecmaVersion": 11,
+    "ecmaVersion": 2019,
     "sourceType": "module"
   },
-  "plugins": ["react"],
+  "plugins": ["svelte3"],
+  "overrides": [
+    {
+      "files": ["**/*.svelte"],
+      "processor": "svelte3/svelte3"
+    }
+  ],
   "rules": {}
 }
