@@ -7,8 +7,7 @@
   import DashboardTable from './Table.svelte'
   import DashboardToolbar from './Toolbar.svelte'
   import GraphProduct from "../GraphProduct.svelte";
-  import Tree from "../Tree/Tree.svelte";
-  import VariableSelector from "../VariableSelector/Card.svelte";
+  import VariableSelector from "../VariableSelector/VariableSelector.svelte";
   // Note that 'export' actually declares the props being passed
   // INTO into this component by its parent/client.
   export let title, author, products, company, logo, homePage
@@ -20,8 +19,7 @@
   let dashboardTable = false
   let dashboardToolbar = false
   let graphProduct = false
-  let tree = true
-  let variableSelector = false
+  let variableSelector = true
 
 </script>
 
@@ -35,7 +33,6 @@
       {#if dashboardChart}<DashboardChart/>{/if}
       {#if dashboardTable}<DashboardTable/>{/if}
       {#if graphProduct}<GraphProduct {products} />{/if}
-      {#if tree}<Tree/>{/if}
       {#if variableSelector}<VariableSelector/>{/if}
     </main>
   </div>

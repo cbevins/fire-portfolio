@@ -1,5 +1,5 @@
 import { writable } from 'svelte/store';
-import { variableMap } from './modules.js'
+import { variableMap } from './variables.js'
 
 export const _selected = writable([])
 

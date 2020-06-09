@@ -18,7 +18,7 @@ export const variableMap = new Map([
   ['d3', {selected: false, label: 'Scorch Height'}],
 ])
 
-function x(key) {
+function v(key) {
   const obj = variableMap.get(key)
   return {
     type: 'item',
@@ -28,25 +28,26 @@ function x(key) {
     selected: obj.selected
   }
 }
-export const modules = [
+
+export const variableTree = [
   { type: 'container',
     key:  'surfaceFire',
     label: 'Surface Fire',
-    items: [x('a1'), x('a2'), x('a3')],
+    items: [v('a1'), v('a2'), v('a3')],
   }, {
     type: 'container',
     key: 'fireEllipse',
     label: 'Fire Ellipse',
-    items: [x('b1'), x('b2'), x('b3'), x('b4'), x('b5'), x('b6')]
+    items: [v('b1'), v('b2'), v('b3'), v('b4'), v('b5'), v('b6')]
   }, {
     type: 'container',
     key: 'scorchHeight',
     label: 'Scorch Height',
-    items: [x('c1')]
+    items: [v('c1')]
   }, {
     type: 'container',
     key: 'treeMortality',
     label: 'Tree Mortality',
-    items: [x('d1'), x('d2'), x('d3')],
+    items: [v('d1'), v('d2'), v('d3')],
   }
 ]

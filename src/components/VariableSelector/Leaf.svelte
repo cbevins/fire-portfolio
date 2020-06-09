@@ -1,6 +1,6 @@
 <script>
-  import { _selected } from './modulesStore.js'
-  import { variableMap } from './modules.js'
+  import { _selected } from './variablesStore.js'
+  import { variableMap } from './variables.js'
 
   export let label, key, selected
 
