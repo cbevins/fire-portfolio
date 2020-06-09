@@ -7,7 +7,7 @@
 Currently selected:
   <ul>
     {#each $_selected.sort() as key}
-      <li>{key}</li>
+      <li>{variableMap.get(key).label}</li>
     {/each}
   </ul>
 

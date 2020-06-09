@@ -1,5 +1,7 @@
 <script>
   import { _selected } from './modulesStore.js'
+  import { variableMap } from './modules.js'
+
   export let label, key, selected
 
   $: type = label.slice(label.lastIndexOf('.') + 1);
@@ -7,7 +9,6 @@
   function clicked() {
     selected = !selected
     _selected.select(key, selected)
-    //alert(`${label} selected=${$_selected}`)
   }
 </script>
 
