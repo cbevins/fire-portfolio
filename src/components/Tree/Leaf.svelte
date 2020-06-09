@@ -1,5 +1,5 @@
 <script>
-  import { _selected } from './modules.js'
+  import { _selected } from './modulesStore.js'
   export let label, key, selected
 
   $: type = label.slice(label.lastIndexOf('.') + 1);
