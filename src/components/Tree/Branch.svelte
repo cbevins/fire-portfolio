@@ -6,6 +6,22 @@
 	function toggle() { expanded = !expanded }
 </script>
 
+<span class:expanded on:click={toggle}>{label}</span>
+
+{#if expanded}
+	<ul>
+		{#each items as item}
+			<li>
+				{#if item.type === 'container'}
+					<svelte:self {...item}/>
+				{:else}
+					<Leaf {...item}/>
+				{/if}
+			</li>
+		{/each}
+	</ul>
+{/if}
+
 <style>
 	span {
 		padding: 0 0 0 1.5em;
@@ -30,19 +46,3 @@
 		padding: 0.2em 0;
 	}
 </style>
-
-<span class:expanded on:click={toggle}>{label}</span>
-
-{#if expanded}
-	<ul>
-		{#each items as item}
-			<li>
-				{#if item.type === 'container'}
-					<svelte:self {...item}/>
-				{:else}
-					<Leaf {...item}/>
-				{/if}
-			</li>
-		{/each}
-	</ul>
-{/if}

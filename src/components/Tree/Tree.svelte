@@ -1,6 +1,14 @@
 <script>
+  import { _selected } from './modulesStore.js'
+  import { modules, variableMap } from './modules.js'
   import Branch from './Branch.svelte';
-  import { modules } from './modules.js'
 </script>
+
+Currently selected:
+  <ul>
+    {#each $_selected.sort() as key}
+      <li>{key}</li>
+    {/each}
+  </ul>
 
 <Branch label="Home" items={modules} expanded/>

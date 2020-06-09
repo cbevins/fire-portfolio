@@ -2,7 +2,7 @@
 // with additional user interface properties
 // such as 'selected', 'module', 'palette', 'units', etc props
 
-export const variables = new Map([
+export const variableMap = new Map([
   ['a1', {selected: false, label: 'Maximum Fire Spread Rate' }],
   ['a2', {selected: false, label: 'Direction of Maximum Spread from Upslope'}],
   ['a3', {selected: false, label: 'Maximum Flame Length'}],
@@ -19,7 +19,7 @@ export const variables = new Map([
 ])
 
 function x(key) {
-  const obj = variables.get(key)
+  const obj = variableMap.get(key)
   return {
     type: 'item',
     key: key,

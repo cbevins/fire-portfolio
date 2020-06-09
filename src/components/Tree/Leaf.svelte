@@ -6,12 +6,8 @@
 
   function clicked() {
     selected = !selected
-    if (selected) {
-      _selected.select(key)
-    } else {
-      _selected.remove(key)
-    }
-    alert(`${label} selected=${$_selected}`)
+    _selected.select(key, selected)
+    //alert(`${label} selected=${$_selected}`)
   }
 </script>
 
