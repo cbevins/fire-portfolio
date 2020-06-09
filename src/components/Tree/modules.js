@@ -23,42 +23,29 @@ function map(key) {
   return {type: 'item', key: key, label: obj.label, items: []}
 }
 
+function x(key) {
+  const obj = variables.get(key)
+  return {type: 'item', key: key, selected: obj.selected, label: obj.label}
+}
 export const modules = [
   { type: 'container',
     key:  'surfaceFire',
     label: 'Surface Fire',
-    items: [
-      {type: 'item', key: 'a1', selected: false, label: 'Maximum Fire Spread Rate' },
-      {type: 'item', key: 'a2', selected: false, label: 'Direction of Maximum Spread from Upslope' },
-      {type: 'item', key: 'a3', selected: false, label: 'Maximum Flame Length'}
-    ]
+    items: [x('a1'), x('a2'), x('a3')],
   }, {
     type: 'container',
     key: 'fireEllipse',
     label: 'Fire Ellipse',
-    items: [
-      {type: 'item', key: 'b1', selected: false, label: 'Spread Rate at Ellipse Head'},
-      {type: 'item', key: 'b2', selected: false, label: 'Flame Length at Ellipse Head'},
-      {type: 'item', key: 'b3', selected: false, label: 'Spread Rate at Ellipse Flank'},
-      {type: 'item', key: 'b4', selected: false, label: 'Flame Length at Ellipse Flank'},
-      {type: 'item', key: 'b5', selected: false, label: 'Spread Rate at Ellipse Back'},
-      {type: 'item', key: 'b6', selected: false, label: 'Flame Length at Ellipse Back'},
-    ]
+    items: [x('b1'), x('b2'), x('b3'), x('b4'), x('b5'), x('b6')]
   }, {
     type: 'container',
     key: 'scorchHeight',
     label: 'Scorch Height',
-    items: [
-      {type: 'item', key: 'c1', selected: false, label: 'Scorch Height'}
-    ]
+    items: [x('c1')]
   }, {
     type: 'container',
     key: 'treeMortality',
     label: 'Tree Mortality',
-    items: [
-      {type: 'item', key: 'd1', selected: false, label: 'Tree Mortality'},
-      {type: 'item', key: 'd2', selected: false, label: 'Bark Thckness'},
-      {type: 'item', key: 'd3', selected: false, label: 'Scorch Height'}
-    ]
+    items: [x('d1'), x('d2'), x('d3')],
   }
 ]
