@@ -6,6 +6,12 @@
 
   $: type = label.slice(label.lastIndexOf('.') + 1);
 
+  let checked = ''
+  if ( selected ) {
+    checked = "checked"
+    _selected.select(key, true)
+  }
+
   function clicked() {
     selected = !selected
     _selected.select(key, selected)
@@ -22,7 +28,9 @@
 
 <span style="background-image: url(https://svelte.dev/tutorial/icons/{type}.svg)">
   <label>
-    <input type=checkbox id={key} on:change={clicked(selected)}>
+    <input type=checkbox
+      id={'variable-selector-checkbox-'+key}
+      on:change={clicked(selected)} {checked}>
     {label}
   </label>
 </span>

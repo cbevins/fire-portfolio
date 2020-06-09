@@ -2,12 +2,11 @@
   import { _selected } from './variablesStore.js'
   import { variableTree, variableMap } from './variables.js'
   import Branch from './Branch.svelte';
-  import { Button, Collapse,
+  import { Badge, Button, Collapse,
     Card, CardBody, CardHeader, CardTitle } from "sveltestrap";
   let isOpen = false
 </script>
 
-<div class="overflow-auto" max-height="100">
   <Card class="mb-3">
     <CardHeader>
       <Button color="primary" size="sm"
@@ -18,7 +17,9 @@
             <span class="fa fa-toggle-down"></span>
           {/if}
       </Button>
-      Currently {$_selected.length} Selected Variables of Interest
+      There are currently
+      <Badge color="success">{$_selected.length}</Badge>
+      Selected Variables of Interest
     </CardHeader>
 
     <Collapse {isOpen}>
@@ -31,4 +32,3 @@
       </CardBody>
     </Collapse>
   </Card>
-</div>

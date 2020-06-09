@@ -4,7 +4,7 @@
 
 export const variableMap = new Map([
   ['a1', {selected: false, label: 'Maximum Fire Spread Rate' }],
-  ['a2', {selected: false, label: 'Direction of Maximum Spread from Upslope'}],
+  ['a2', {selected: true, label: 'Direction of Maximum Spread from Upslope'}],
   ['a3', {selected: false, label: 'Maximum Flame Length'}],
   ['b1', {selected: false, label: 'Spread Rate at Ellipse Head'}],
   ['b2', {selected: false, label: 'Flame Length at Ellipse Head'}],
