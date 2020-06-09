@@ -18,14 +18,15 @@ export const variables = new Map([
   ['d3', {selected: false, label: 'Scorch Height'}],
 ])
 
-function map(key) {
-  const obj = variables.get(key)
-  return {type: 'item', key: key, label: obj.label, items: []}
-}
-
 function x(key) {
   const obj = variables.get(key)
-  return {type: 'item', key: key, selected: obj.selected, label: obj.label}
+  return {
+    type: 'item',
+    key: key,
+    label: obj.label,
+    items: [],
+    selected: obj.selected
+  }
 }
 export const modules = [
   { type: 'container',
