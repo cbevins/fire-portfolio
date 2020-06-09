@@ -2,6 +2,14 @@ import { writable } from 'svelte/store';
 
 export const _selected = writable([])
 
+_selected.select = item => _selected.update(currentItems => {
+  return [...currentItems, item]
+})
+
+_selected.remove = item => _selected.update(currentItems => {
+  return currentItems.filter(key => key !== item);
+})
+
 export const modules = [
   { type: 'container',
     key:  'surfaceFire',

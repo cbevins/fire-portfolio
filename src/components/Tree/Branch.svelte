@@ -1,15 +1,9 @@
 <script>
 	import Leaf from './Leaf.svelte';
-  import FaPlusCircle from 'svelte-icons/fa/FaPlusCircle.svelte'
-  import FaMinusCircle from 'svelte-icons/fa/FaMinusCircle.svelte'
-
 	export let expanded = false;
-	export let label;
-	export let items;
+	export let label, items
 
-	function toggle() {
-		expanded = !expanded;
-	}
+	function toggle() { expanded = !expanded }
 </script>
 
 <style>

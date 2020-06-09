@@ -1,11 +1,17 @@
 <script>
-  import { CustomInput, Label, Input } from "sveltestrap";
-  export let label, key, selected;
+  import { _selected } from './modules.js'
+  export let label, key, selected
+
   $: type = label.slice(label.lastIndexOf('.') + 1);
 
   function clicked() {
     selected = !selected
-    //alert(`${label} selected=${selected}`)
+    if (selected) {
+      _selected.select(key)
+    } else {
+      _selected.remove(key)
+    }
+    alert(`${label} selected=${$_selected}`)
   }
 </script>
 
