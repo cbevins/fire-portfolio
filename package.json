@@ -50,6 +50,7 @@
     "eslint-plugin-promise": "4.2.1",
     "eslint-plugin-standard": "4.0.1",
     "eslint-plugin-svelte3": "2.7.3",
+    "glyphicons": "0.2.0",
     "jest": "26.0.1",
     "prettier-eslint": "9.0.1",
     "prettier-eslint-cli": "5.0.0",

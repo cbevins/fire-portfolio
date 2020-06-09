@@ -3,7 +3,7 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
-public/build/
+
 # User-specific files
 *.rsuser
 *.suo
@@ -349,3 +349,8 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+public/build/bundle.css
+public/build/bundle.css
+public/build/bundle.css.map
+public/build/bundle.js
+public/build/bundle.js.map
