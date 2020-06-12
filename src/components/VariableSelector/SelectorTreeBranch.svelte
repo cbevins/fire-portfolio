@@ -1,5 +1,5 @@
 <script>
-	import Leaf from './Leaf.svelte';
+	import SelectorTreeLeaf from './SelectorTreeLeaf.svelte';
 	export let expanded = false;
 	export let label, items
 
@@ -15,7 +15,7 @@
 				{#if item.type === 'container'}
 					<svelte:self {...item}/>
 				{:else}
-					<Leaf {...item}/>
+					<SelectorTreeLeaf {...item}/>
 				{/if}
 			</li>
 		{/each}
