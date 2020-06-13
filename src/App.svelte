@@ -1,23 +1,34 @@
 <script>
-  // This is the <App /> component,
-  // which is instantiated by main.js via 'new App(obj)', where
-  // the obj.props arg contains all props passed into <App />.
-  // import Dashboard from './components/Dashboard/Dashboard.svelte'
-  // import ThreePanel from "./components/Other/ThreePanel.svelte"
-  // import Welcome from "./components/Other/Welcome.svelte"
+  /*
+  This is the <App /> component instantiated by 'main.js' via `new App(obj)`,
+  where the `obj.props` arg contains all props passed into <App />.
 
-  // Note that 'export' actually declares the props being passed
-  // INTO into this component by its parent/client.
-  // export let title, author, products, company, logo, homePage
+  Note that in Svelte, the 'export' statement actually declares the props
+  that *this* component accepts from its parent/client.
+*/
+  export let dag
 
-  // Create a Map if component name-reference pairs
-  // so subcomponents can dynamically inject other subcomponents
-  // without first importing them
+/*
+  The purpose of App.svelte simply to
+  - setContext() for shared data, and
+  - add the <SinglePageApp/> component.
+
+  The first setContext() is a component map that can be accessed by any subcomponent,
+  rather than trying to maintain component `import` file locations across many files and folders.
+  So, we import ALL components here in one place and add them to the componentMap.
+  Subcomponents the access (and dynamically inject) other subcomponents via:
+
+    import { getContext } from 'svelte'
+    const {getMap, getComponent} = getContext('componentMap')
+    <svelte:component this={getComponent('ReallyNiftyComponentKey')}/>
+
+  without ever importing them.
+*/
   import { onMount, setContext } from 'svelte'
-  import Spa from "./components/Spa/Spa.svelte"
-  import RedThing from './components/Spa/RedThing.svelte'
-  import GreenThing from './components/Spa/GreenThing.svelte'
-  import BlueThing from './components/Spa/BlueThing.svelte'
+  import SinglePageApp from "./components/SinglePageApp/SinglePageApp.svelte"
+  import RedThing from './components/Archive/Things/RedThing.svelte'
+  import GreenThing from './components/Archive/Things/GreenThing.svelte'
+  import BlueThing from './components/Archive/Things/BlueThing.svelte'
   import VariableSelector from './components/VariableSelector/VariableSelector.svelte'
 
   const compMap = new Map([
@@ -31,11 +42,9 @@
     getMap: () => compMap,
     getComponent: (key) => compMap.get(key)
   })
+
+// The second Context is The Dag!
+  setContext('dag', dag)
 </script>
 
-<Spa/>
-<!--
-<Dashboard {title} {author} {products} {company} {logo} {homePage} />
-<Welcome {title} {author} {products}/>
- -->
-
+<SinglePageApp/>

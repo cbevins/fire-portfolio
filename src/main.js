@@ -1,18 +1,19 @@
+import { BehavePlus, Dag, Equations } from 'behaveplus-core'
+import { TranslationMap } from './translationMap.js'
 import App from './App.svelte'
-//import 'bootstrap/dist/css/bootstrap.min.css';
-import { Products } from 'behaveplus-core'
 
-const products = new Products.Product()
+const root = new Dag.Root(
+  BehavePlus.BpxGenome,
+  BehavePlus.BpxVariantMap,
+  Equations.MethodMap,
+  TranslationMap.translationMap
+)
+const dag = root.addDag('Products')
 
 const app = new App({
   target: document.body,
   props: {
-    products: products,
-    title: 'Wildland Fire Portfolio',
-    author: 'Collin D Bevins',
-    company: 'SEM',
-    logo: "favicon.sem.png",
-    homePage: "http://fire.org"
+    dag: dag
   }
 })
 
