@@ -1,11 +1,3 @@
-export const getExamplePages = function (nPages = 10) {
-  const pages = []
-  for (let i = 0; i < nPages; i++) {
-    pages.push({ id: `page-${i}`, title: `Welcome to Page ${i}` })
-  }
-  return pages
-}
-
 export const getGraphPages = function () {
   return [
     {

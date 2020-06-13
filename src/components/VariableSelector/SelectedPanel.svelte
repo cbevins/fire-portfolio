@@ -2,7 +2,7 @@
   import { _selected } from './variablesStore.js'
   import { variableTree, variableMap } from './variables.js'
   import { Badge, Button, Collapse, Card, CardBody, CardHeader, CardTitle } from "sveltestrap";
-  let isOpen = false
+  let isOpen = true
 </script>
 
   <Card class="mb-3">

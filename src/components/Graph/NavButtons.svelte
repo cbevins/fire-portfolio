@@ -9,10 +9,10 @@
 </script>
 
 <a href={"#"+pages[prev].id} class={buttonClasses} role="button">
-  <span class="fa fa-angle-double-left"/>Prev ({pages[prev].title})</a>
+  <span class="fa fa-angle-double-left"/>&nbsp;Prev ({pages[prev].title})</a>
 <a href={"#"+pages[next].id} class={buttonClasses} role="button">
-  <span class="fa fa-angle-double-right"/>Next ({pages[next].title})</a>
+  <span class="fa fa-angle-double-right"/>&nbsp;Next ({pages[next].title})</a>
 <a href={"#"+pages[0].id} class={buttonClasses} role="button">
-  <span class="fa fa-angle-double-up"/>First</a>
+  <span class="fa fa-angle-double-up"/>&nbsp;First</a>
 <a href={"#"+pages[last].id} class={buttonClasses} role="button">
-  <span class="fa fa-angle-double-down"/>Last</a>
+  <span class="fa fa-angle-double-down"/>&nbsp;Last</a>

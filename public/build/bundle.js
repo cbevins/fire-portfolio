@@ -12480,9 +12480,10 @@ var app = (function () {
   	return child_ctx;
   }
 
-  // (14:4) {#each pages as page, pageIndex}
+  // (12:4) {#each pages as page, pageIndex}
   function create_each_block(ctx) {
-  	let switch_instance_anchor;
+  	let t;
+  	let hr;
   	let current;
   	var switch_value = /*getComponent*/ ctx[1](/*page*/ ctx[3].component);
 
@@ -12503,14 +12504,17 @@ var app = (function () {
   	const block = {
   		c: function create() {
   			if (switch_instance) create_component(switch_instance.$$.fragment);
-  			switch_instance_anchor = empty();
+  			t = space();
+  			hr = element("hr");
+  			add_location(hr, file, 13, 6, 504);
   		},
   		m: function mount(target, anchor) {
   			if (switch_instance) {
   				mount_component(switch_instance, target, anchor);
   			}
 
-  			insert_dev(target, switch_instance_anchor, anchor);
+  			insert_dev(target, t, anchor);
+  			insert_dev(target, hr, anchor);
   			current = true;
   		},
   		p: function update(ctx, dirty) {
@@ -12530,7 +12534,7 @@ var app = (function () {
   					switch_instance = new switch_value(switch_props(ctx));
   					create_component(switch_instance.$$.fragment);
   					transition_in(switch_instance.$$.fragment, 1);
-  					mount_component(switch_instance, switch_instance_anchor.parentNode, switch_instance_anchor);
+  					mount_component(switch_instance, t.parentNode, t);
   				} else {
   					switch_instance = null;
   				}
@@ -12546,8 +12550,9 @@ var app = (function () {
   			current = false;
   		},
   		d: function destroy(detaching) {
-  			if (detaching) detach_dev(switch_instance_anchor);
   			if (switch_instance) destroy_component(switch_instance, detaching);
+  			if (detaching) detach_dev(t);
+  			if (detaching) detach_dev(hr);
   		}
   	};
 
@@ -12555,7 +12560,7 @@ var app = (function () {
   		block,
   		id: create_each_block.name,
   		type: "each",
-  		source: "(14:4) {#each pages as page, pageIndex}",
+  		source: "(12:4) {#each pages as page, pageIndex}",
   		ctx
   	});
 
@@ -12590,9 +12595,9 @@ var app = (function () {
   			attr_dev(main, "role", "main");
   			attr_dev(main, "class", "col-md-12 ml-sm-auto col-lg-10 px-md-4");
   			set_style(main, "height", "400px");
-  			add_location(main, file, 12, 2, 293);
+  			add_location(main, file, 10, 2, 290);
   			attr_dev(div, "class", "container-fluid");
-  			add_location(div, file, 11, 0, 261);
+  			add_location(div, file, 9, 0, 258);
   		},
   		l: function claim(nodes) {
   			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -16317,7 +16322,7 @@ var app = (function () {
   		c: function create() {
   			span = element("span");
   			attr_dev(span, "class", "fa fa-toggle-down");
-  			add_location(span, file$c, 15, 12, 508);
+  			add_location(span, file$c, 15, 12, 507);
   		},
   		m: function mount(target, anchor) {
   			insert_dev(target, span, anchor);
@@ -16346,7 +16351,7 @@ var app = (function () {
   		c: function create() {
   			span = element("span");
   			attr_dev(span, "class", "fa fa-toggle-up");
-  			add_location(span, file$c, 13, 12, 440);
+  			add_location(span, file$c, 13, 12, 439);
   		},
   		m: function mount(target, anchor) {
   			insert_dev(target, span, anchor);
@@ -16599,7 +16604,7 @@ var app = (function () {
   		c: function create() {
   			li = element("li");
   			t = text(t_value);
-  			add_location(li, file$c, 28, 12, 853);
+  			add_location(li, file$c, 28, 12, 852);
   		},
   		m: function mount(target, anchor) {
   			insert_dev(target, li, anchor);
@@ -16643,7 +16648,7 @@ var app = (function () {
   				each_blocks[i].c();
   			}
 
-  			add_location(ul, file$c, 26, 8, 793);
+  			add_location(ul, file$c, 26, 8, 792);
   		},
   		m: function mount(target, anchor) {
   			insert_dev(target, ul, anchor);
@@ -16889,7 +16894,7 @@ var app = (function () {
   	let $_selected;
   	validate_store(_selected, "_selected");
   	component_subscribe($$self, _selected, $$value => $$invalidate(1, $_selected = $$value));
-  	let isOpen = false;
+  	let isOpen = true;
   	const writable_props = [];
 
   	Object.keys($$props).forEach(key => {
@@ -18235,7 +18240,7 @@ var app = (function () {
 
   	const block = {
   		c: function create() {
-  			t = text("You may select as many Graph Y Variables as you like from the first panel;\r\n      the selected variables will appear on the second panel.");
+  			t = text("Select as many Graph Y Variables as you like from the first panel;\r\n      the selected variables will appear in the second panel.");
   		},
   		m: function mount(target, anchor) {
   			insert_dev(target, t, anchor);
@@ -18262,7 +18267,7 @@ var app = (function () {
 
   	const block = {
   		c: function create() {
-  			t = text("A separate graph will be produced for each selected variable.\r\n      As you change the set of selected variables,\r\n      the number of applicable BehavePlus configuration options will likely change,\r\n      as may the set of required input variables.");
+  			t = text("A separate graph will be produced for each selected Y variable.\r\n      As you select and unselect Y variables,\r\n      the number of applicable BehavePlus configuration options will likely change,\r\n      as may the set of required input variables.");
   		},
   		m: function mount(target, anchor) {
   			insert_dev(target, t, anchor);
@@ -18566,23 +18571,23 @@ var app = (function () {
   		c: function create() {
   			a0 = element("a");
   			span0 = element("span");
-  			t0 = text("Prev (");
+  			t0 = text(" Prev (");
   			t1 = text(t1_value);
   			t2 = text(")");
   			t3 = space();
   			a1 = element("a");
   			span1 = element("span");
-  			t4 = text("Next (");
+  			t4 = text(" Next (");
   			t5 = text(t5_value);
   			t6 = text(")");
   			t7 = space();
   			a2 = element("a");
   			span2 = element("span");
-  			t8 = text("First");
+  			t8 = text(" First");
   			t9 = space();
   			a3 = element("a");
   			span3 = element("span");
-  			t10 = text("Last");
+  			t10 = text(" Last");
   			attr_dev(span0, "class", "fa fa-angle-double-left");
   			add_location(span0, file$h, 11, 2, 321);
   			attr_dev(a0, "href", a0_href_value = "#" + /*pages*/ ctx[0][/*prev*/ ctx[2]].id);
@@ -18590,23 +18595,23 @@ var app = (function () {
   			attr_dev(a0, "role", "button");
   			add_location(a0, file$h, 10, 0, 253);
   			attr_dev(span1, "class", "fa fa-angle-double-right");
-  			add_location(span1, file$h, 13, 2, 459);
+  			add_location(span1, file$h, 13, 2, 465);
   			attr_dev(a1, "href", a1_href_value = "#" + /*pages*/ ctx[0][/*next*/ ctx[3]].id);
   			attr_dev(a1, "class", /*buttonClasses*/ ctx[4]);
   			attr_dev(a1, "role", "button");
-  			add_location(a1, file$h, 12, 0, 391);
+  			add_location(a1, file$h, 12, 0, 397);
   			attr_dev(span2, "class", "fa fa-angle-double-up");
-  			add_location(span2, file$h, 15, 2, 595);
+  			add_location(span2, file$h, 15, 2, 607);
   			attr_dev(a2, "href", a2_href_value = "#" + /*pages*/ ctx[0][0].id);
   			attr_dev(a2, "class", /*buttonClasses*/ ctx[4]);
   			attr_dev(a2, "role", "button");
-  			add_location(a2, file$h, 14, 0, 530);
+  			add_location(a2, file$h, 14, 0, 542);
   			attr_dev(span3, "class", "fa fa-angle-double-down");
-  			add_location(span3, file$h, 17, 2, 710);
+  			add_location(span3, file$h, 17, 2, 728);
   			attr_dev(a3, "href", a3_href_value = "#" + /*pages*/ ctx[0][/*last*/ ctx[1]].id);
   			attr_dev(a3, "class", /*buttonClasses*/ ctx[4]);
   			attr_dev(a3, "role", "button");
-  			add_location(a3, file$h, 16, 0, 642);
+  			add_location(a3, file$h, 16, 0, 660);
   		},
   		l: function claim(nodes) {
   			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -18774,7 +18779,7 @@ var app = (function () {
   const get_title_slot_changes = dirty => ({});
   const get_title_slot_context = ctx => ({});
 
-  // (15:27)            
+  // (18:27)            
   function fallback_block_1(ctx) {
   	let span;
 
@@ -18783,7 +18788,7 @@ var app = (function () {
   			span = element("span");
   			span.textContent = "Unknown title";
   			attr_dev(span, "class", "missing");
-  			add_location(span, file$i, 15, 10, 499);
+  			add_location(span, file$i, 18, 10, 614);
   		},
   		m: function mount(target, anchor) {
   			insert_dev(target, span, anchor);
@@ -18797,18 +18802,18 @@ var app = (function () {
   		block,
   		id: fallback_block_1.name,
   		type: "fallback",
-  		source: "(15:27)            ",
+  		source: "(18:27)            ",
   		ctx
   	});
 
   	return block;
   }
 
-  // (14:6) <CardTitle>
+  // (17:6) <CardTitle>
   function create_default_slot_4$2(ctx) {
   	let current;
-  	const title_slot_template = /*$$slots*/ ctx[5].title;
-  	const title_slot = create_slot(title_slot_template, ctx, /*$$scope*/ ctx[6], get_title_slot_context);
+  	const title_slot_template = /*$$slots*/ ctx[7].title;
+  	const title_slot = create_slot(title_slot_template, ctx, /*$$scope*/ ctx[8], get_title_slot_context);
   	const title_slot_or_fallback = title_slot || fallback_block_1(ctx);
 
   	const block = {
@@ -18824,8 +18829,8 @@ var app = (function () {
   		},
   		p: function update(ctx, dirty) {
   			if (title_slot) {
-  				if (title_slot.p && dirty & /*$$scope*/ 64) {
-  					update_slot(title_slot, title_slot_template, ctx, /*$$scope*/ ctx[6], dirty, get_title_slot_changes, get_title_slot_context);
+  				if (title_slot.p && dirty & /*$$scope*/ 256) {
+  					update_slot(title_slot, title_slot_template, ctx, /*$$scope*/ ctx[8], dirty, get_title_slot_changes, get_title_slot_context);
   				}
   			}
   		},
@@ -18847,14 +18852,14 @@ var app = (function () {
   		block,
   		id: create_default_slot_4$2.name,
   		type: "slot",
-  		source: "(14:6) <CardTitle>",
+  		source: "(17:6) <CardTitle>",
   		ctx
   	});
 
   	return block;
   }
 
-  // (13:4) <CardHeader class={borderColor}>
+  // (16:4) <CardHeader class={headerClasses}>
   function create_default_slot_3$2(ctx) {
   	let current;
 
@@ -18877,7 +18882,7 @@ var app = (function () {
   		p: function update(ctx, dirty) {
   			const cardtitle_changes = {};
 
-  			if (dirty & /*$$scope*/ 64) {
+  			if (dirty & /*$$scope*/ 256) {
   				cardtitle_changes.$$scope = { dirty, ctx };
   			}
 
@@ -18901,14 +18906,14 @@ var app = (function () {
   		block,
   		id: create_default_slot_3$2.name,
   		type: "slot",
-  		source: "(13:4) <CardHeader class={borderColor}>",
+  		source: "(16:4) <CardHeader class={headerClasses}>",
   		ctx
   	});
 
   	return block;
   }
 
-  // (21:27)          
+  // (24:27)          
   function fallback_block$2(ctx) {
   	let span;
 
@@ -18917,7 +18922,7 @@ var app = (function () {
   			span = element("span");
   			span.textContent = "Unknown content";
   			attr_dev(span, "class", "missing");
-  			add_location(span, file$i, 21, 8, 670);
+  			add_location(span, file$i, 24, 8, 781);
   		},
   		m: function mount(target, anchor) {
   			insert_dev(target, span, anchor);
@@ -18931,18 +18936,18 @@ var app = (function () {
   		block,
   		id: fallback_block$2.name,
   		type: "fallback",
-  		source: "(21:27)          ",
+  		source: "(24:27)          ",
   		ctx
   	});
 
   	return block;
   }
 
-  // (20:4) <CardBody class={cardBodyClasses}>
+  // (23:4) <CardBody class={bodyClasses}>
   function create_default_slot_2$3(ctx) {
   	let current;
-  	const content_slot_template = /*$$slots*/ ctx[5].content;
-  	const content_slot = create_slot(content_slot_template, ctx, /*$$scope*/ ctx[6], get_content_slot_context);
+  	const content_slot_template = /*$$slots*/ ctx[7].content;
+  	const content_slot = create_slot(content_slot_template, ctx, /*$$scope*/ ctx[8], get_content_slot_context);
   	const content_slot_or_fallback = content_slot || fallback_block$2(ctx);
 
   	const block = {
@@ -18958,8 +18963,8 @@ var app = (function () {
   		},
   		p: function update(ctx, dirty) {
   			if (content_slot) {
-  				if (content_slot.p && dirty & /*$$scope*/ 64) {
-  					update_slot(content_slot, content_slot_template, ctx, /*$$scope*/ ctx[6], dirty, get_content_slot_changes, get_content_slot_context);
+  				if (content_slot.p && dirty & /*$$scope*/ 256) {
+  					update_slot(content_slot, content_slot_template, ctx, /*$$scope*/ ctx[8], dirty, get_content_slot_changes, get_content_slot_context);
   				}
   			}
   		},
@@ -18981,14 +18986,14 @@ var app = (function () {
   		block,
   		id: create_default_slot_2$3.name,
   		type: "slot",
-  		source: "(20:4) <CardBody class={cardBodyClasses}>",
+  		source: "(23:4) <CardBody class={bodyClasses}>",
   		ctx
   	});
 
   	return block;
   }
 
-  // (25:4) <CardFooter class={borderColor}>
+  // (28:4) <CardFooter class={footerClasses}>
   function create_default_slot_1$3(ctx) {
   	let current;
 
@@ -19032,14 +19037,14 @@ var app = (function () {
   		block,
   		id: create_default_slot_1$3.name,
   		type: "slot",
-  		source: "(25:4) <CardFooter class={borderColor}>",
+  		source: "(28:4) <CardFooter class={footerClasses}>",
   		ctx
   	});
 
   	return block;
   }
 
-  // (12:2) <Card id={page.id} style="height: 400px" class={borderColor}>
+  // (15:2) <Card id={page.id} style="height: 400px" class={cardClasses}>
   function create_default_slot$3(ctx) {
   	let t0;
   	let t1;
@@ -19047,7 +19052,7 @@ var app = (function () {
 
   	const cardheader = new CardHeader({
   			props: {
-  				class: /*borderColor*/ ctx[3],
+  				class: /*headerClasses*/ ctx[4],
   				$$slots: { default: [create_default_slot_3$2] },
   				$$scope: { ctx }
   			},
@@ -19056,7 +19061,7 @@ var app = (function () {
 
   	const cardbody = new CardBody({
   			props: {
-  				class: /*cardBodyClasses*/ ctx[4],
+  				class: /*bodyClasses*/ ctx[6],
   				$$slots: { default: [create_default_slot_2$3] },
   				$$scope: { ctx }
   			},
@@ -19065,7 +19070,7 @@ var app = (function () {
 
   	const cardfooter = new CardFooter({
   			props: {
-  				class: /*borderColor*/ ctx[3],
+  				class: /*footerClasses*/ ctx[5],
   				$$slots: { default: [create_default_slot_1$3] },
   				$$scope: { ctx }
   			},
@@ -19091,21 +19096,21 @@ var app = (function () {
   		p: function update(ctx, dirty) {
   			const cardheader_changes = {};
 
-  			if (dirty & /*$$scope*/ 64) {
+  			if (dirty & /*$$scope*/ 256) {
   				cardheader_changes.$$scope = { dirty, ctx };
   			}
 
   			cardheader.$set(cardheader_changes);
   			const cardbody_changes = {};
 
-  			if (dirty & /*$$scope*/ 64) {
+  			if (dirty & /*$$scope*/ 256) {
   				cardbody_changes.$$scope = { dirty, ctx };
   			}
 
   			cardbody.$set(cardbody_changes);
   			const cardfooter_changes = {};
 
-  			if (dirty & /*$$scope, pages, pageIndex*/ 67) {
+  			if (dirty & /*$$scope, pages, pageIndex*/ 259) {
   				cardfooter_changes.$$scope = { dirty, ctx };
   			}
 
@@ -19137,7 +19142,7 @@ var app = (function () {
   		block,
   		id: create_default_slot$3.name,
   		type: "slot",
-  		source: "(12:2) <Card id={page.id} style=\\\"height: 400px\\\" class={borderColor}>",
+  		source: "(15:2) <Card id={page.id} style=\\\"height: 400px\\\" class={cardClasses}>",
   		ctx
   	});
 
@@ -19153,7 +19158,7 @@ var app = (function () {
   			props: {
   				id: /*page*/ ctx[2].id,
   				style: "height: 400px",
-  				class: /*borderColor*/ ctx[3],
+  				class: /*cardClasses*/ ctx[3],
   				$$slots: { default: [create_default_slot$3] },
   				$$scope: { ctx }
   			},
@@ -19165,7 +19170,7 @@ var app = (function () {
   			div = element("div");
   			create_component(card.$$.fragment);
   			attr_dev(div, "id", div_id_value = /*page*/ ctx[2].id + "Component");
-  			add_location(div, file$i, 10, 0, 311);
+  			add_location(div, file$i, 13, 0, 424);
   		},
   		l: function claim(nodes) {
   			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -19178,7 +19183,7 @@ var app = (function () {
   		p: function update(ctx, [dirty]) {
   			const card_changes = {};
 
-  			if (dirty & /*$$scope, pages, pageIndex*/ 67) {
+  			if (dirty & /*$$scope, pages, pageIndex*/ 259) {
   				card_changes.$$scope = { dirty, ctx };
   			}
 
@@ -19210,11 +19215,15 @@ var app = (function () {
   	return block;
   }
 
+  const borderColor = "border-success";
+
   function instance$i($$self, $$props, $$invalidate) {
   	let { pages } = $$props, { pageIndex } = $$props;
   	let page = pages[pageIndex];
-  	let borderColor = "border-success";
-  	let cardBodyClasses = "overflow-auto " + borderColor;
+  	let cardClasses = "border-success";
+  	let headerClasses = "border-success";
+  	let footerClasses = "border-success";
+  	let bodyClasses = "overflow-auto " + borderColor;
   	const writable_props = ["pages", "pageIndex"];
 
   	Object.keys($$props).forEach(key => {
@@ -19227,7 +19236,7 @@ var app = (function () {
   	$$self.$set = $$props => {
   		if ("pages" in $$props) $$invalidate(0, pages = $$props.pages);
   		if ("pageIndex" in $$props) $$invalidate(1, pageIndex = $$props.pageIndex);
-  		if ("$$scope" in $$props) $$invalidate(6, $$scope = $$props.$$scope);
+  		if ("$$scope" in $$props) $$invalidate(8, $$scope = $$props.$$scope);
   	};
 
   	$$self.$capture_state = () => ({
@@ -19242,22 +19251,37 @@ var app = (function () {
   		pageIndex,
   		page,
   		borderColor,
-  		cardBodyClasses
+  		cardClasses,
+  		headerClasses,
+  		footerClasses,
+  		bodyClasses
   	});
 
   	$$self.$inject_state = $$props => {
   		if ("pages" in $$props) $$invalidate(0, pages = $$props.pages);
   		if ("pageIndex" in $$props) $$invalidate(1, pageIndex = $$props.pageIndex);
   		if ("page" in $$props) $$invalidate(2, page = $$props.page);
-  		if ("borderColor" in $$props) $$invalidate(3, borderColor = $$props.borderColor);
-  		if ("cardBodyClasses" in $$props) $$invalidate(4, cardBodyClasses = $$props.cardBodyClasses);
+  		if ("cardClasses" in $$props) $$invalidate(3, cardClasses = $$props.cardClasses);
+  		if ("headerClasses" in $$props) $$invalidate(4, headerClasses = $$props.headerClasses);
+  		if ("footerClasses" in $$props) $$invalidate(5, footerClasses = $$props.footerClasses);
+  		if ("bodyClasses" in $$props) $$invalidate(6, bodyClasses = $$props.bodyClasses);
   	};
 
   	if ($$props && "$$inject" in $$props) {
   		$$self.$inject_state($$props.$$inject);
   	}
 
-  	return [pages, pageIndex, page, borderColor, cardBodyClasses, $$slots, $$scope];
+  	return [
+  		pages,
+  		pageIndex,
+  		page,
+  		cardClasses,
+  		headerClasses,
+  		footerClasses,
+  		bodyClasses,
+  		$$slots,
+  		$$scope
+  	];
   }
 
   class StandardPage extends SvelteComponentDev {
@@ -20684,7 +20708,7 @@ var app = (function () {
   /* C:\cbevins\dev\node\fire-portfolio\src\components\Graph\YVariable.svelte generated by Svelte v3.23.0 */
   const file$p = "C:\\cbevins\\dev\\node\\fire-portfolio\\src\\components\\Graph\\YVariable.svelte";
 
-  // (8:2) <span slot="title">
+  // (12:2) <span slot="title">
   function create_title_slot$6(ctx) {
   	let span;
 
@@ -20693,7 +20717,7 @@ var app = (function () {
   			span = element("span");
   			span.textContent = `${/*page*/ ctx[2].title}`;
   			attr_dev(span, "slot", "title");
-  			add_location(span, file$p, 7, 2, 168);
+  			add_location(span, file$p, 11, 2, 313);
   		},
   		m: function mount(target, anchor) {
   			insert_dev(target, span, anchor);
@@ -20708,30 +20732,78 @@ var app = (function () {
   		block,
   		id: create_title_slot$6.name,
   		type: "slot",
-  		source: "(8:2) <span slot=\\\"title\\\">",
+  		source: "(12:2) <span slot=\\\"title\\\">",
   		ctx
   	});
 
   	return block;
   }
 
-  // (9:2) <span slot="content">
+  // (13:2) <span slot="content">
   function create_content_slot$6(ctx) {
   	let span;
+  	let current;
+  	var switch_value = /*content*/ ctx[3];
+
+  	function switch_props(ctx) {
+  		return { $$inline: true };
+  	}
+
+  	if (switch_value) {
+  		var switch_instance = new switch_value(switch_props());
+  	}
 
   	const block = {
   		c: function create() {
   			span = element("span");
-  			span.textContent = `This is the '${/*page*/ ctx[2].title}' page`;
+  			if (switch_instance) create_component(switch_instance.$$.fragment);
   			attr_dev(span, "slot", "content");
-  			add_location(span, file$p, 8, 2, 209);
+  			add_location(span, file$p, 12, 2, 354);
   		},
   		m: function mount(target, anchor) {
   			insert_dev(target, span, anchor);
+
+  			if (switch_instance) {
+  				mount_component(switch_instance, span, null);
+  			}
+
+  			current = true;
   		},
-  		p: noop,
+  		p: function update(ctx, dirty) {
+  			if (switch_value !== (switch_value = /*content*/ ctx[3])) {
+  				if (switch_instance) {
+  					group_outros();
+  					const old_component = switch_instance;
+
+  					transition_out(old_component.$$.fragment, 1, 0, () => {
+  						destroy_component(old_component, 1);
+  					});
+
+  					check_outros();
+  				}
+
+  				if (switch_value) {
+  					switch_instance = new switch_value(switch_props());
+  					create_component(switch_instance.$$.fragment);
+  					transition_in(switch_instance.$$.fragment, 1);
+  					mount_component(switch_instance, span, null);
+  				} else {
+  					switch_instance = null;
+  				}
+  			}
+  		},
+  		i: function intro(local) {
+  			if (current) return;
+  			if (switch_instance) transition_in(switch_instance.$$.fragment, local);
+  			current = true;
+  		},
+  		o: function outro(local) {
+  			if (switch_instance) transition_out(switch_instance.$$.fragment, local);
+  			current = false;
+  		},
   		d: function destroy(detaching) {
   			if (detaching) detach_dev(span);
+  			if (switch_instance) destroy_component(switch_instance);
   		}
   	};
 
@@ -20739,14 +20811,14 @@ var app = (function () {
   		block,
   		id: create_content_slot$6.name,
   		type: "slot",
-  		source: "(9:2) <span slot=\\\"content\\\">",
+  		source: "(13:2) <span slot=\\\"content\\\">",
   		ctx
   	});
 
   	return block;
   }
 
-  // (7:0) <StandardPage {pages} {pageIndex}>
+  // (11:0) <StandardPage {pages} {pageIndex}>
   function create_default_slot$a(ctx) {
   	let t;
 
@@ -20758,6 +20830,8 @@ var app = (function () {
   			insert_dev(target, t, anchor);
   		},
   		p: noop,
+  		i: noop,
+  		o: noop,
   		d: function destroy(detaching) {
   			if (detaching) detach_dev(t);
   		}
@@ -20767,7 +20841,7 @@ var app = (function () {
   		block,
   		id: create_default_slot$a.name,
   		type: "slot",
-  		source: "(7:0) <StandardPage {pages} {pageIndex}>",
+  		source: "(11:0) <StandardPage {pages} {pageIndex}>",
   		ctx
   	});
 
@@ -20807,7 +20881,7 @@ var app = (function () {
   			if (dirty & /*pages*/ 1) standardpage_changes.pages = /*pages*/ ctx[0];
   			if (dirty & /*pageIndex*/ 2) standardpage_changes.pageIndex = /*pageIndex*/ ctx[1];
 
-  			if (dirty & /*$$scope*/ 8) {
+  			if (dirty & /*$$scope*/ 32) {
   				standardpage_changes.$$scope = { dirty, ctx };
   			}
 
@@ -20841,6 +20915,8 @@ var app = (function () {
   function instance$p($$self, $$props, $$invalidate) {
   	let { pages } = $$props, { pageIndex } = $$props;
   	let page = pages[pageIndex];
+  	const { getComponent } = getContext("componentMap");
+  	const content = getComponent("VariableSelector");
   	const writable_props = ["pages", "pageIndex"];
 
   	Object.keys($$props).forEach(key => {
@@ -20855,7 +20931,15 @@ var app = (function () {
   		if ("pageIndex" in $$props) $$invalidate(1, pageIndex = $$props.pageIndex);
   	};
 
-  	$$self.$capture_state = () => ({ StandardPage, pages, pageIndex, page });
+  	$$self.$capture_state = () => ({
+  		getContext,
+  		StandardPage,
+  		pages,
+  		pageIndex,
+  		page,
+  		getComponent,
+  		content
+  	});
 
   	$$self.$inject_state = $$props => {
   		if ("pages" in $$props) $$invalidate(0, pages = $$props.pages);
@@ -20867,7 +20951,7 @@ var app = (function () {
   		$$self.$inject_state($$props.$$inject);
   	}
 
-  	return [pages, pageIndex, page];
+  	return [pages, pageIndex, page, content];
   }
 
   class YVariable extends SvelteComponentDev {
