@@ -7,40 +7,39 @@ export const getExamplePages = function (nPages = 10) {
 }
 
 export const getGraphPages = function () {
-  const pages = [
+  return [
     {
       id: 'graphIntroPage',
       title: 'Begin Graph',
-      components: ['GreenThing', 'RedThing', 'BlueThing']
+      component: 'GraphIntro'
     }, {
       id: 'graphYVariablePage',
       title: 'Select Graph Y Variable',
-      components: ['VariableSelector']
+      component: 'GraphYVariable'
     }, {
-      id: 'graphConfigureModulesPage',
+      id: 'graphModelConfigPage',
       title: 'Configure Fire Modules',
-      components: ['GreenThing']
+      component: 'GraphModelConfig'
     }, {
       id: 'graphXVariablePage',
       title: 'Select Graph X Variable',
-      components: ['BlueThing']
+      component: 'GraphXVariable'
     }, {
       id: 'graphZVariablePage',
       title: 'Select Graph Z Variable',
-      components: ['RedThing']
+      component: 'GraphZVariable'
     }, {
       id: 'graphInputsPage',
       title: 'Enter Fire Model Inputs',
-      components: ['GreenThing']
+      component: 'GraphInputs'
     }, {
       id: 'graphDecorationsPage',
       title: 'Enter Graph Decorations',
-      components: ['BlueThing']
+      component: 'GraphDecorations'
     }, {
-      id: 'graphViewPage',
+      id: 'graphResultsPage',
       title: 'View Graph',
-      components: ['RedThing']
+      component: 'GraphResults'
     }
   ]
-  return pages
 }

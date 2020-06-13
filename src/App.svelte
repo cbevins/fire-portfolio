@@ -26,15 +26,26 @@
 */
   import { onMount, setContext } from 'svelte'
   import SinglePageApp from "./components/SinglePageApp/SinglePageApp.svelte"
-  import RedThing from './components/Archive/Things/RedThing.svelte'
-  import GreenThing from './components/Archive/Things/GreenThing.svelte'
-  import BlueThing from './components/Archive/Things/BlueThing.svelte'
   import VariableSelector from './components/VariableSelector/VariableSelector.svelte'
 
+  import GraphIntro from './components/Graph/Intro.svelte'
+  import GraphDecorations from './components/Graph/Decorations.svelte'
+  import GraphInputs from './components/Graph/Inputs.svelte'
+  import GraphModelConfig from './components/Graph/ModelConfig.svelte'
+  import GraphResults from './components/Graph/Results.svelte'
+  import GraphXVariable from './components/Graph/XVariable.svelte'
+  import GraphYVariable from './components/Graph/YVariable.svelte'
+  import GraphZVariable from './components/Graph/ZVariable.svelte'
+
   const compMap = new Map([
-    ['RedThing', RedThing],
-    ['BlueThing', BlueThing],
-    ['GreenThing', GreenThing],
+    ['GraphDecorations', GraphDecorations],
+    ['GraphInputs', GraphInputs],
+    ['GraphIntro', GraphIntro],
+    ['GraphModelConfig', GraphModelConfig],
+    ['GraphResults', GraphResults],
+    ['GraphXVariable', GraphXVariable],
+    ['GraphYVariable', GraphYVariable],
+    ['GraphZVariable', GraphZVariable],
     ['VariableSelector', VariableSelector],
   ])
 
