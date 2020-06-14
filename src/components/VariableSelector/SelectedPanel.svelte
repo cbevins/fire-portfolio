@@ -1,7 +1,10 @@
 <script>
+  import { getContext } from 'svelte'
+  import { keyLabel } from '../../appData.js'
   import { _selected } from './variablesStore.js'
-  import { variableTree, variableMap } from './variables.js'
   import { Badge, Button, Collapse, Card, CardBody, CardHeader, CardTitle } from "sveltestrap";
+
+  let variableMap = getContext('variableMap')
   let isOpen = true
 </script>
 
@@ -26,7 +29,7 @@
       <CardBody>
         <ul>
           {#each $_selected.sort() as key}
-            <li>{variableMap.get(key).label}</li>
+            <li>{keyLabel(key)}</li>
           {/each}
         </ul>
       </CardBody>

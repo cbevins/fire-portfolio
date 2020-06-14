@@ -1,9 +1,11 @@
-import { writable } from 'svelte/store';
-import { variableMap } from './variables.js'
+import { writable } from 'svelte/store'
+import { getVariableMap } from '../../appData.js'
+
+const variableMap = getVariableMap()
 
 const initialSelected = []
 variableMap.forEach(item => {
-  if ( item.isSelected ) {
+  if (item.isSelected) {
     initialSelected.push(item.key)
   }
 })

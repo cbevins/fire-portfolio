@@ -1,9 +1,14 @@
 <script>
+  import { getContext } from 'svelte';
   import { _selected } from './variablesStore.js'
-  import { variableTree, variableMap } from './variables.js'
+  //import { variableTree, variableMap } from './variables.js'
   import SelectorTreeBranch from './SelectorTreeBranch.svelte';
-  import { Button, Collapse,
-    Card, CardBody, CardHeader, CardTitle } from "sveltestrap";
+  import { Button, Collapse, Card, CardBody, CardHeader, CardTitle } from "sveltestrap";
+
+  let dag = getContext('dag')
+  let variableTree = getContext('variableTree')
+  let variableMap = getContext('variableMap')
+
   let isOpen = true
 
   function clearAll() {

@@ -8,12 +8,18 @@ const production = !process.env.ROLLUP_WATCH;
 
 export default {
 	input: 'src/main.js',
-	output: {
+	output: [{
 		sourcemap: true,
 		format: 'iife',
 		name: 'app',
 		file: 'public/build/bundle.js'
-	},
+  },
+  {
+    file: 'public/build/bundle.min.js',
+    format: 'iife',
+    name: 'app',
+    plugins: [terser()]
+  }],
 	plugins: [
 		svelte({
 			// enable run-time checks when not in production

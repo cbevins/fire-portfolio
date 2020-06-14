@@ -101,12 +101,24 @@ export const SurfaceFireText = [
   ],
   ['surface.primary.fuel.model.catalogKey', 'Primary Fuel Catalog Key'],
   [
-    'surface.weighted.fire.arithmeticMean.spreadRate/label@en_US',
+    'surface.weighted.fire.spreadRate/label@en_US',
     'Surface Fire Maximum Spread Rate'
+  ],
+  [
+    'surface.weighted.fire.flameLength/label@en_US',
+    'Surface Fire Maximum FlameLength'
+  ],
+  [
+    'surface.weighted.fire.scorchHeight/label@en_US',
+    'Surface Fire Maximum Scorch Height'
   ],
   [
     'surface.weighted.fire.heading.fromUpslope/label@en_US',
     'Direction of Maximum Spread from Upslope'
+  ],
+  [
+    'surface.weighted.fire.heading.fromNorth/label@en_US',
+    'Direction of Maximum Spread from North'
   ],
   [
     'surface.weighted.fire.heatPerUnitArea/label@en_US',

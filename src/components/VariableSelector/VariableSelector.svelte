@@ -1,7 +1,7 @@
 <script>
   import SelectedPanel from './SelectedPanel.svelte'
   import SelectorTree from './SelectorTree.svelte'
-  import { Col, Row, CardText } from "sveltestrap";
+  import { Row, CardText } from "sveltestrap";
 </script>
 
 <div id="selectVariablesComponent">

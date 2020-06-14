@@ -1,10 +1,16 @@
 <script>
+  import { getContext } from 'svelte'
+  import { keyLabel } from '../../appData.js'
   import { _selected } from './variablesStore.js'
-  import { variableMap } from './variables.js'
 
-  export let label, key, selected
+  export let key
 
-  $: type = label.slice(label.lastIndexOf('.') + 1);
+  let variableMap = getContext('variableMap')
+  let variable = variableMap.get(key)
+  let label = keyLabel(key)
+  let selected = variable.node.status.isSelected
+
+  $: type = 'gif'
 
   let checked = ''
   if ( selected ) {

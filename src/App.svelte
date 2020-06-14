@@ -6,16 +6,16 @@
   Note that in Svelte, the 'export' statement actually declares the props
   that *this* component accepts from its parent/client.
 */
-  export let dag
+  export let dag, variableTree, variableMap
 
 /*
   The purpose of App.svelte simply to
-  - setContext() for shared data, and
+  - setContext() for all shared data, and
   - add the <SinglePageApp/> component.
 
   The first setContext() is a component map that can be accessed by any subcomponent,
   rather than trying to maintain component `import` file locations across many files and folders.
-  So, we import ALL components here in one place and add them to the componentMap.
+  So, we import *ALL* components here in one place and add them to the componentMap.
   Subcomponents the access (and dynamically inject) other subcomponents via:
 
     import { getContext } from 'svelte'
@@ -56,6 +56,8 @@
 
 // The second Context is The Dag!
   setContext('dag', dag)
+  setContext('variableTree', variableTree)
+  setContext('variableMap', variableMap)
 </script>
 
 <SinglePageApp/>
