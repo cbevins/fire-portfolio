@@ -4,15 +4,16 @@
 
   export let pages, pageIndex
   let page = pages[pageIndex]
-  const borderColor = 'border-success'
+  const borderColor = 'border-0'
   let cardClasses = 'border-success'
-  let headerClasses = 'border-success'
-  let footerClasses = 'border-success'
+  let headerClasses = 'border-0'
+  let footerClasses = 'border-0'
   let bodyClasses = "overflow-auto "+borderColor
 </script>
 
 <div id={page.id+"Component"}>
-  <Card id={page.id} style="height: 400px" class={cardClasses}>
+  <!-- <Card id={page.id} style="height: 400px" class={cardClasses}> -->
+  <Card id={page.id} class={cardClasses}>
     <CardHeader class={headerClasses}>
       <CardTitle>
         <slot name='title'>

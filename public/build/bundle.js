@@ -12547,7 +12547,7 @@ var app = (function () {
     return [
       {
         id: 'graphIntroPage',
-        title: 'Begin Graph',
+        title: 'BehavePlus Graph Builder',
         component: 'GraphIntro'
       }, {
         id: 'graphYVariablePage',
@@ -12555,7 +12555,7 @@ var app = (function () {
         component: 'GraphYVariable'
       }, {
         id: 'graphModelConfigPage',
-        title: 'Configure Fire Modules',
+        title: 'Configure Fire Models',
         component: 'GraphModelConfig'
       }, {
         id: 'graphXVariablePage',
@@ -12834,6 +12834,16 @@ var app = (function () {
 
   const subscriber_queue = [];
   /**
+   * Creates a `Readable` store that allows reading by subscription.
+   * @param value initial value
+   * @param {StartStopNotifier}start start and stop notifications for subscriptions
+   */
+  function readable(value, start) {
+      return {
+          subscribe: writable(value, start).subscribe,
+      };
+  }
+  /**
    * Create a `Writable` store that allows both updating and reading by subscription.
    * @param {*=}value initial value
    * @param {StartStopNotifier=}start start and stop notifications for subscriptions
@@ -12883,6 +12893,47 @@ var app = (function () {
       }
       return { set, update, subscribe };
   }
+  function derived$1(stores, fn, initial_value) {
+      const single = !Array.isArray(stores);
+      const stores_array = single
+          ? [stores]
+          : stores;
+      const auto = fn.length < 2;
+      return readable(initial_value, (set) => {
+          let inited = false;
+          const values = [];
+          let pending = 0;
+          let cleanup = noop;
+          const sync = () => {
+              if (pending) {
+                  return;
+              }
+              cleanup();
+              const result = fn(single ? values[0] : values, set);
+              if (auto) {
+                  set(result);
+              }
+              else {
+                  cleanup = is_function(result) ? result : noop;
+              }
+          };
+          const unsubscribers = stores_array.map((store, i) => subscribe(store, (value) => {
+              values[i] = value;
+              pending &= ~(1 << i);
+              if (inited) {
+                  sync();
+              }
+          }, () => {
+              pending |= (1 << i);
+          }));
+          inited = true;
+          sync();
+          return function stop() {
+              run_all(unsubscribers);
+              cleanup();
+          };
+      });
+  }
 
   const variableMap$1 = getVariableMap();
 
@@ -12897,9 +12948,16 @@ var app = (function () {
 
   _selected.select = (item, isSelected) => _selected.update(currentItems => {
     variableMap$1.get(item).selected = isSelected;
+    dag.runSelected([[item, isSelected]]);
     return isSelected ? [...currentItems, item]
       : currentItems.filter(key => key !== item)
   });
+
+  const _configs = derived$1(_selected, () =>
+    dag.requiredConfigNodes().map(node => node.node.key));
+
+  const _inputs = derived$1(_selected, () =>
+    dag.requiredInputNodes().map(node => node.node.key));
 
   function cubicOut(t) {
       const f = t - 1.0;
@@ -18426,29 +18484,29 @@ var app = (function () {
   			span3 = element("span");
   			t10 = text(" Last");
   			attr_dev(span0, "class", "fa fa-angle-double-left");
-  			add_location(span0, file$g, 11, 2, 321);
+  			add_location(span0, file$g, 11, 2, 332);
   			attr_dev(a0, "href", a0_href_value = "#" + /*pages*/ ctx[0][/*prev*/ ctx[2]].id);
   			attr_dev(a0, "class", /*buttonClasses*/ ctx[4]);
   			attr_dev(a0, "role", "button");
-  			add_location(a0, file$g, 10, 0, 253);
+  			add_location(a0, file$g, 10, 0, 263);
   			attr_dev(span1, "class", "fa fa-angle-double-right");
-  			add_location(span1, file$g, 13, 2, 465);
+  			add_location(span1, file$g, 13, 2, 478);
   			attr_dev(a1, "href", a1_href_value = "#" + /*pages*/ ctx[0][/*next*/ ctx[3]].id);
   			attr_dev(a1, "class", /*buttonClasses*/ ctx[4]);
   			attr_dev(a1, "role", "button");
-  			add_location(a1, file$g, 12, 0, 397);
+  			add_location(a1, file$g, 12, 0, 409);
   			attr_dev(span2, "class", "fa fa-angle-double-up");
-  			add_location(span2, file$g, 15, 2, 607);
+  			add_location(span2, file$g, 15, 2, 622);
   			attr_dev(a2, "href", a2_href_value = "#" + /*pages*/ ctx[0][0].id);
   			attr_dev(a2, "class", /*buttonClasses*/ ctx[4]);
   			attr_dev(a2, "role", "button");
-  			add_location(a2, file$g, 14, 0, 542);
+  			add_location(a2, file$g, 14, 0, 556);
   			attr_dev(span3, "class", "fa fa-angle-double-down");
-  			add_location(span3, file$g, 17, 2, 728);
+  			add_location(span3, file$g, 17, 2, 745);
   			attr_dev(a3, "href", a3_href_value = "#" + /*pages*/ ctx[0][/*last*/ ctx[1]].id);
   			attr_dev(a3, "class", /*buttonClasses*/ ctx[4]);
   			attr_dev(a3, "role", "button");
-  			add_location(a3, file$g, 16, 0, 660);
+  			add_location(a3, file$g, 16, 0, 676);
   		},
   		l: function claim(nodes) {
   			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -18616,7 +18674,7 @@ var app = (function () {
   const get_title_slot_changes = dirty => ({});
   const get_title_slot_context = ctx => ({});
 
-  // (18:27)            
+  // (19:27)             
   function fallback_block_1(ctx) {
   	let span;
 
@@ -18625,7 +18683,7 @@ var app = (function () {
   			span = element("span");
   			span.textContent = "Unknown title";
   			attr_dev(span, "class", "missing");
-  			add_location(span, file$h, 18, 10, 614);
+  			add_location(span, file$h, 19, 10, 666);
   		},
   		m: function mount(target, anchor) {
   			insert_dev(target, span, anchor);
@@ -18639,14 +18697,14 @@ var app = (function () {
   		block,
   		id: fallback_block_1.name,
   		type: "fallback",
-  		source: "(18:27)            ",
+  		source: "(19:27)             ",
   		ctx
   	});
 
   	return block;
   }
 
-  // (17:6) <CardTitle>
+  // (18:6) <CardTitle>
   function create_default_slot_4$2(ctx) {
   	let current;
   	const title_slot_template = /*$$slots*/ ctx[7].title;
@@ -18689,14 +18747,14 @@ var app = (function () {
   		block,
   		id: create_default_slot_4$2.name,
   		type: "slot",
-  		source: "(17:6) <CardTitle>",
+  		source: "(18:6) <CardTitle>",
   		ctx
   	});
 
   	return block;
   }
 
-  // (16:4) <CardHeader class={headerClasses}>
+  // (17:4) <CardHeader class={headerClasses}>
   function create_default_slot_3$2(ctx) {
   	let current;
 
@@ -18743,14 +18801,14 @@ var app = (function () {
   		block,
   		id: create_default_slot_3$2.name,
   		type: "slot",
-  		source: "(16:4) <CardHeader class={headerClasses}>",
+  		source: "(17:4) <CardHeader class={headerClasses}>",
   		ctx
   	});
 
   	return block;
   }
 
-  // (24:27)          
+  // (25:27)           
   function fallback_block$2(ctx) {
   	let span;
 
@@ -18759,7 +18817,7 @@ var app = (function () {
   			span = element("span");
   			span.textContent = "Unknown content";
   			attr_dev(span, "class", "missing");
-  			add_location(span, file$h, 24, 8, 781);
+  			add_location(span, file$h, 25, 8, 839);
   		},
   		m: function mount(target, anchor) {
   			insert_dev(target, span, anchor);
@@ -18773,14 +18831,14 @@ var app = (function () {
   		block,
   		id: fallback_block$2.name,
   		type: "fallback",
-  		source: "(24:27)          ",
+  		source: "(25:27)           ",
   		ctx
   	});
 
   	return block;
   }
 
-  // (23:4) <CardBody class={bodyClasses}>
+  // (24:4) <CardBody class={bodyClasses}>
   function create_default_slot_2$3(ctx) {
   	let current;
   	const content_slot_template = /*$$slots*/ ctx[7].content;
@@ -18823,14 +18881,14 @@ var app = (function () {
   		block,
   		id: create_default_slot_2$3.name,
   		type: "slot",
-  		source: "(23:4) <CardBody class={bodyClasses}>",
+  		source: "(24:4) <CardBody class={bodyClasses}>",
   		ctx
   	});
 
   	return block;
   }
 
-  // (28:4) <CardFooter class={footerClasses}>
+  // (29:4) <CardFooter class={footerClasses}>
   function create_default_slot_1$3(ctx) {
   	let current;
 
@@ -18874,14 +18932,14 @@ var app = (function () {
   		block,
   		id: create_default_slot_1$3.name,
   		type: "slot",
-  		source: "(28:4) <CardFooter class={footerClasses}>",
+  		source: "(29:4) <CardFooter class={footerClasses}>",
   		ctx
   	});
 
   	return block;
   }
 
-  // (15:2) <Card id={page.id} style="height: 400px" class={cardClasses}>
+  // (16:2) <Card id={page.id} class={cardClasses}>
   function create_default_slot$3(ctx) {
   	let t0;
   	let t1;
@@ -18979,7 +19037,7 @@ var app = (function () {
   		block,
   		id: create_default_slot$3.name,
   		type: "slot",
-  		source: "(15:2) <Card id={page.id} style=\\\"height: 400px\\\" class={cardClasses}>",
+  		source: "(16:2) <Card id={page.id} class={cardClasses}>",
   		ctx
   	});
 
@@ -18994,7 +19052,6 @@ var app = (function () {
   	const card = new Card({
   			props: {
   				id: /*page*/ ctx[2].id,
-  				style: "height: 400px",
   				class: /*cardClasses*/ ctx[3],
   				$$slots: { default: [create_default_slot$3] },
   				$$scope: { ctx }
@@ -19007,7 +19064,7 @@ var app = (function () {
   			div = element("div");
   			create_component(card.$$.fragment);
   			attr_dev(div, "id", div_id_value = /*page*/ ctx[2].id + "Component");
-  			add_location(div, file$h, 13, 0, 424);
+  			add_location(div, file$h, 13, 0, 419);
   		},
   		l: function claim(nodes) {
   			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -19052,14 +19109,14 @@ var app = (function () {
   	return block;
   }
 
-  const borderColor = "border-success";
+  const borderColor = "border-0";
 
   function instance$h($$self, $$props, $$invalidate) {
   	let { pages } = $$props, { pageIndex } = $$props;
   	let page = pages[pageIndex];
   	let cardClasses = "border-success";
-  	let headerClasses = "border-success";
-  	let footerClasses = "border-success";
+  	let headerClasses = "border-0";
+  	let footerClasses = "border-0";
   	let bodyClasses = "overflow-auto " + borderColor;
   	const writable_props = ["pages", "pageIndex"];
 
@@ -19165,13 +19222,6 @@ var app = (function () {
   /* C:\cbevins\dev\node\fire-portfolio\src\components\Graph\Intro.svelte generated by Svelte v3.23.0 */
   const file$i = "C:\\cbevins\\dev\\node\\fire-portfolio\\src\\components\\Graph\\Intro.svelte";
 
-  function get_each_context$3(ctx, list, i) {
-  	const child_ctx = ctx.slice();
-  	child_ctx[7] = list[i];
-  	child_ctx[9] = i;
-  	return child_ctx;
-  }
-
   // (14:2) <span slot="title">
   function create_title_slot(ctx) {
   	let span;
@@ -19179,7 +19229,7 @@ var app = (function () {
   	const block = {
   		c: function create() {
   			span = element("span");
-  			span.textContent = `${/*page*/ ctx[3].title}`;
+  			span.textContent = `${/*page*/ ctx[2].title}`;
   			attr_dev(span, "slot", "title");
   			add_location(span, file$i, 13, 2, 380);
   		},
@@ -19203,105 +19253,23 @@ var app = (function () {
   	return block;
   }
 
-  // (16:4) {#each varray as v, index}
-  function create_each_block$3(ctx) {
-  	let t0;
-  	let t1;
-  	let t2_value = /*v*/ ctx[7].key + "";
-  	let t2;
-  	let br;
-
-  	const block = {
-  		c: function create() {
-  			t0 = text(/*index*/ ctx[9]);
-  			t1 = space();
-  			t2 = text(t2_value);
-  			br = element("br");
-  			add_location(br, file$i, 16, 21, 495);
-  		},
-  		m: function mount(target, anchor) {
-  			insert_dev(target, t0, anchor);
-  			insert_dev(target, t1, anchor);
-  			insert_dev(target, t2, anchor);
-  			insert_dev(target, br, anchor);
-  		},
-  		p: noop,
-  		d: function destroy(detaching) {
-  			if (detaching) detach_dev(t0);
-  			if (detaching) detach_dev(t1);
-  			if (detaching) detach_dev(t2);
-  			if (detaching) detach_dev(br);
-  		}
-  	};
-
-  	dispatch_dev("SvelteRegisterBlock", {
-  		block,
-  		id: create_each_block$3.name,
-  		type: "each",
-  		source: "(16:4) {#each varray as v, index}",
-  		ctx
-  	});
-
-  	return block;
-  }
-
   // (15:2) <span slot="content">
   function create_content_slot(ctx) {
   	let span;
-  	let each_value = /*varray*/ ctx[2];
-  	validate_each_argument(each_value);
-  	let each_blocks = [];
-
-  	for (let i = 0; i < each_value.length; i += 1) {
-  		each_blocks[i] = create_each_block$3(get_each_context$3(ctx, each_value, i));
-  	}
 
   	const block = {
   		c: function create() {
   			span = element("span");
-
-  			for (let i = 0; i < each_blocks.length; i += 1) {
-  				each_blocks[i].c();
-  			}
-
+  			span.textContent = `${new Date()}`;
   			attr_dev(span, "slot", "content");
   			add_location(span, file$i, 14, 2, 421);
   		},
   		m: function mount(target, anchor) {
   			insert_dev(target, span, anchor);
-
-  			for (let i = 0; i < each_blocks.length; i += 1) {
-  				each_blocks[i].m(span, null);
-  			}
   		},
-  		p: function update(ctx, dirty) {
-  			if (dirty & /*varray*/ 4) {
-  				each_value = /*varray*/ ctx[2];
-  				validate_each_argument(each_value);
-  				let i;
-
-  				for (i = 0; i < each_value.length; i += 1) {
-  					const child_ctx = get_each_context$3(ctx, each_value, i);
-
-  					if (each_blocks[i]) {
-  						each_blocks[i].p(child_ctx, dirty);
-  					} else {
-  						each_blocks[i] = create_each_block$3(child_ctx);
-  						each_blocks[i].c();
-  						each_blocks[i].m(span, null);
-  					}
-  				}
-
-  				for (; i < each_blocks.length; i += 1) {
-  					each_blocks[i].d(1);
-  				}
-
-  				each_blocks.length = each_value.length;
-  			}
-  		},
+  		p: noop,
   		d: function destroy(detaching) {
   			if (detaching) detach_dev(span);
-  			destroy_each(each_blocks, detaching);
   		}
   	};
 
@@ -19377,7 +19345,7 @@ var app = (function () {
   			if (dirty & /*pages*/ 1) standardpage_changes.pages = /*pages*/ ctx[0];
   			if (dirty & /*pageIndex*/ 2) standardpage_changes.pageIndex = /*pageIndex*/ ctx[1];
 
-  			if (dirty & /*$$scope*/ 1024) {
+  			if (dirty & /*$$scope*/ 128) {
   				standardpage_changes.$$scope = { dirty, ctx };
   			}
 
@@ -19447,15 +19415,15 @@ var app = (function () {
   		if ("dag" in $$props) dag = $$props.dag;
   		if ("variableTree" in $$props) variableTree = $$props.variableTree;
   		if ("variableMap" in $$props) variableMap = $$props.variableMap;
-  		if ("varray" in $$props) $$invalidate(2, varray = $$props.varray);
-  		if ("page" in $$props) $$invalidate(3, page = $$props.page);
+  		if ("varray" in $$props) varray = $$props.varray;
+  		if ("page" in $$props) $$invalidate(2, page = $$props.page);
   	};
 
   	if ($$props && "$$inject" in $$props) {
   		$$self.$inject_state($$props.$$inject);
   	}
 
-  	return [pages, pageIndex, varray, page];
+  	return [pages, pageIndex, page];
   }
 
   class Intro extends SvelteComponentDev {
@@ -19962,16 +19930,22 @@ var app = (function () {
   /* C:\cbevins\dev\node\fire-portfolio\src\components\Graph\ModelConfig.svelte generated by Svelte v3.23.0 */
   const file$l = "C:\\cbevins\\dev\\node\\fire-portfolio\\src\\components\\Graph\\ModelConfig.svelte";
 
-  // (8:2) <span slot="title">
+  function get_each_context$3(ctx, list, i) {
+  	const child_ctx = ctx.slice();
+  	child_ctx[4] = list[i];
+  	return child_ctx;
+  }
+
+  // (13:2) <span slot="title">
   function create_title_slot$3(ctx) {
   	let span;
 
   	const block = {
   		c: function create() {
   			span = element("span");
-  			span.textContent = `${/*page*/ ctx[2].title}`;
+  			span.textContent = `${/*page*/ ctx[3].title}`;
   			attr_dev(span, "slot", "title");
-  			add_location(span, file$l, 7, 2, 168);
+  			add_location(span, file$l, 12, 2, 322);
   		},
   		m: function mount(target, anchor) {
   			insert_dev(target, span, anchor);
@@ -19986,30 +19960,179 @@ var app = (function () {
   		block,
   		id: create_title_slot$3.name,
   		type: "slot",
-  		source: "(8:2) <span slot=\\\"title\\\">",
+  		source: "(13:2) <span slot=\\\"title\\\">",
   		ctx
   	});
 
   	return block;
   }
 
-  // (9:2) <span slot="content">
+  // (16:4) <Badge color="success">
+  function create_default_slot_1$4(ctx) {
+  	let t_value = /*$_configs*/ ctx[2].length + "";
+  	let t;
+
+  	const block = {
+  		c: function create() {
+  			t = text(t_value);
+  		},
+  		m: function mount(target, anchor) {
+  			insert_dev(target, t, anchor);
+  		},
+  		p: function update(ctx, dirty) {
+  			if (dirty & /*$_configs*/ 4 && t_value !== (t_value = /*$_configs*/ ctx[2].length + "")) set_data_dev(t, t_value);
+  		},
+  		d: function destroy(detaching) {
+  			if (detaching) detach_dev(t);
+  		}
+  	};
+
+  	dispatch_dev("SvelteRegisterBlock", {
+  		block,
+  		id: create_default_slot_1$4.name,
+  		type: "slot",
+  		source: "(16:4) <Badge color=\\\"success\\\">",
+  		ctx
+  	});
+
+  	return block;
+  }
+
+  // (19:4) {#each $_configs as key}
+  function create_each_block$3(ctx) {
+  	let li;
+  	let t_value = keyLabel(/*key*/ ctx[4]) + "";
+  	let t;
+
+  	const block = {
+  		c: function create() {
+  			li = element("li");
+  			t = text(t_value);
+  			add_location(li, file$l, 19, 6, 542);
+  		},
+  		m: function mount(target, anchor) {
+  			insert_dev(target, li, anchor);
+  			append_dev(li, t);
+  		},
+  		p: function update(ctx, dirty) {
+  			if (dirty & /*$_configs*/ 4 && t_value !== (t_value = keyLabel(/*key*/ ctx[4]) + "")) set_data_dev(t, t_value);
+  		},
+  		d: function destroy(detaching) {
+  			if (detaching) detach_dev(li);
+  		}
+  	};
+
+  	dispatch_dev("SvelteRegisterBlock", {
+  		block,
+  		id: create_each_block$3.name,
+  		type: "each",
+  		source: "(19:4) {#each $_configs as key}",
+  		ctx
+  	});
+
+  	return block;
+  }
+
+  // (14:2) <span slot="content">
   function create_content_slot$3(ctx) {
   	let span;
+  	let t0;
+  	let t1;
+  	let ul;
+  	let current;
+
+  	const badge = new Badge({
+  			props: {
+  				color: "success",
+  				$$slots: { default: [create_default_slot_1$4] },
+  				$$scope: { ctx }
+  			},
+  			$$inline: true
+  		});
+
+  	let each_value = /*$_configs*/ ctx[2];
+  	validate_each_argument(each_value);
+  	let each_blocks = [];
+
+  	for (let i = 0; i < each_value.length; i += 1) {
+  		each_blocks[i] = create_each_block$3(get_each_context$3(ctx, each_value, i));
+  	}
 
   	const block = {
   		c: function create() {
   			span = element("span");
-  			span.textContent = `This is the '${/*page*/ ctx[2].title}' page`;
+  			t0 = text("There are currently\n    ");
+  			create_component(badge.$$.fragment);
+  			t1 = text("\n    Applicable Configuration Options\n  ");
+  			ul = element("ul");
+
+  			for (let i = 0; i < each_blocks.length; i += 1) {
+  				each_blocks[i].c();
+  			}
+
+  			add_location(ul, file$l, 17, 2, 502);
   			attr_dev(span, "slot", "content");
-  			add_location(span, file$l, 8, 2, 209);
+  			add_location(span, file$l, 13, 2, 363);
   		},
   		m: function mount(target, anchor) {
   			insert_dev(target, span, anchor);
+  			append_dev(span, t0);
+  			mount_component(badge, span, null);
+  			append_dev(span, t1);
+  			append_dev(span, ul);
+
+  			for (let i = 0; i < each_blocks.length; i += 1) {
+  				each_blocks[i].m(ul, null);
+  			}
+
+  			current = true;
   		},
-  		p: noop,
+  		p: function update(ctx, dirty) {
+  			const badge_changes = {};
+
+  			if (dirty & /*$$scope, $_configs*/ 132) {
+  				badge_changes.$$scope = { dirty, ctx };
+  			}
+
+  			badge.$set(badge_changes);
+
+  			if (dirty & /*keyLabel, $_configs*/ 4) {
+  				each_value = /*$_configs*/ ctx[2];
+  				validate_each_argument(each_value);
+  				let i;
+
+  				for (i = 0; i < each_value.length; i += 1) {
+  					const child_ctx = get_each_context$3(ctx, each_value, i);
+
+  					if (each_blocks[i]) {
+  						each_blocks[i].p(child_ctx, dirty);
+  					} else {
+  						each_blocks[i] = create_each_block$3(child_ctx);
+  						each_blocks[i].c();
+  						each_blocks[i].m(ul, null);
+  					}
+  				}
+
+  				for (; i < each_blocks.length; i += 1) {
+  					each_blocks[i].d(1);
+  				}
+
+  				each_blocks.length = each_value.length;
+  			}
+  		},
+  		i: function intro(local) {
+  			if (current) return;
+  			transition_in(badge.$$.fragment, local);
+  			current = true;
+  		},
+  		o: function outro(local) {
+  			transition_out(badge.$$.fragment, local);
+  			current = false;
+  		},
   		d: function destroy(detaching) {
   			if (detaching) detach_dev(span);
+  			destroy_component(badge);
+  			destroy_each(each_blocks, detaching);
   		}
   	};
 
@@ -20017,14 +20140,14 @@ var app = (function () {
   		block,
   		id: create_content_slot$3.name,
   		type: "slot",
-  		source: "(9:2) <span slot=\\\"content\\\">",
+  		source: "(14:2) <span slot=\\\"content\\\">",
   		ctx
   	});
 
   	return block;
   }
 
-  // (7:0) <StandardPage {pages} {pageIndex}>
+  // (12:0) <StandardPage {pages} {pageIndex}>
   function create_default_slot$7(ctx) {
   	let t;
 
@@ -20036,6 +20159,8 @@ var app = (function () {
   			insert_dev(target, t, anchor);
   		},
   		p: noop,
+  		i: noop,
+  		o: noop,
   		d: function destroy(detaching) {
   			if (detaching) detach_dev(t);
   		}
@@ -20045,7 +20170,7 @@ var app = (function () {
   		block,
   		id: create_default_slot$7.name,
   		type: "slot",
-  		source: "(7:0) <StandardPage {pages} {pageIndex}>",
+  		source: "(12:0) <StandardPage {pages} {pageIndex}>",
   		ctx
   	});
 
@@ -20085,7 +20210,7 @@ var app = (function () {
   			if (dirty & /*pages*/ 1) standardpage_changes.pages = /*pages*/ ctx[0];
   			if (dirty & /*pageIndex*/ 2) standardpage_changes.pageIndex = /*pageIndex*/ ctx[1];
 
-  			if (dirty & /*$$scope*/ 8) {
+  			if (dirty & /*$$scope, $_configs*/ 132) {
   				standardpage_changes.$$scope = { dirty, ctx };
   			}
 
@@ -20117,6 +20242,9 @@ var app = (function () {
   }
 
   function instance$l($$self, $$props, $$invalidate) {
+  	let $_configs;
+  	validate_store(_configs, "_configs");
+  	component_subscribe($$self, _configs, $$value => $$invalidate(2, $_configs = $$value));
   	let { pages } = $$props, { pageIndex } = $$props;
   	let page = pages[pageIndex];
   	const writable_props = ["pages", "pageIndex"];
@@ -20133,19 +20261,28 @@ var app = (function () {
   		if ("pageIndex" in $$props) $$invalidate(1, pageIndex = $$props.pageIndex);
   	};
 
-  	$$self.$capture_state = () => ({ StandardPage, pages, pageIndex, page });
+  	$$self.$capture_state = () => ({
+  		_configs,
+  		keyLabel,
+  		StandardPage,
+  		Badge,
+  		pages,
+  		pageIndex,
+  		page,
+  		$_configs
+  	});
 
   	$$self.$inject_state = $$props => {
   		if ("pages" in $$props) $$invalidate(0, pages = $$props.pages);
   		if ("pageIndex" in $$props) $$invalidate(1, pageIndex = $$props.pageIndex);
-  		if ("page" in $$props) $$invalidate(2, page = $$props.page);
+  		if ("page" in $$props) $$invalidate(3, page = $$props.page);
   	};
 
   	if ($$props && "$$inject" in $$props) {
   		$$self.$inject_state($$props.$$inject);
   	}
 
-  	return [pages, pageIndex, page];
+  	return [pages, pageIndex, $_configs, page];
   }
 
   class ModelConfig extends SvelteComponentDev {
@@ -20422,16 +20559,22 @@ var app = (function () {
   /* C:\cbevins\dev\node\fire-portfolio\src\components\Graph\XVariable.svelte generated by Svelte v3.23.0 */
   const file$n = "C:\\cbevins\\dev\\node\\fire-portfolio\\src\\components\\Graph\\XVariable.svelte";
 
-  // (8:2) <span slot="title">
+  function get_each_context$4(ctx, list, i) {
+  	const child_ctx = ctx.slice();
+  	child_ctx[4] = list[i];
+  	return child_ctx;
+  }
+
+  // (13:2) <span slot="title">
   function create_title_slot$5(ctx) {
   	let span;
 
   	const block = {
   		c: function create() {
   			span = element("span");
-  			span.textContent = `${/*page*/ ctx[2].title}`;
+  			span.textContent = `${/*page*/ ctx[3].title}`;
   			attr_dev(span, "slot", "title");
-  			add_location(span, file$n, 7, 2, 168);
+  			add_location(span, file$n, 12, 2, 321);
   		},
   		m: function mount(target, anchor) {
   			insert_dev(target, span, anchor);
@@ -20446,30 +20589,179 @@ var app = (function () {
   		block,
   		id: create_title_slot$5.name,
   		type: "slot",
-  		source: "(8:2) <span slot=\\\"title\\\">",
+  		source: "(13:2) <span slot=\\\"title\\\">",
   		ctx
   	});
 
   	return block;
   }
 
-  // (9:2) <span slot="content">
+  // (16:4) <Badge color="success">
+  function create_default_slot_1$5(ctx) {
+  	let t_value = /*$_inputs*/ ctx[2].length + "";
+  	let t;
+
+  	const block = {
+  		c: function create() {
+  			t = text(t_value);
+  		},
+  		m: function mount(target, anchor) {
+  			insert_dev(target, t, anchor);
+  		},
+  		p: function update(ctx, dirty) {
+  			if (dirty & /*$_inputs*/ 4 && t_value !== (t_value = /*$_inputs*/ ctx[2].length + "")) set_data_dev(t, t_value);
+  		},
+  		d: function destroy(detaching) {
+  			if (detaching) detach_dev(t);
+  		}
+  	};
+
+  	dispatch_dev("SvelteRegisterBlock", {
+  		block,
+  		id: create_default_slot_1$5.name,
+  		type: "slot",
+  		source: "(16:4) <Badge color=\\\"success\\\">",
+  		ctx
+  	});
+
+  	return block;
+  }
+
+  // (19:4) {#each $_inputs as key}
+  function create_each_block$4(ctx) {
+  	let li;
+  	let t_value = keyLabel(/*key*/ ctx[4]) + "";
+  	let t;
+
+  	const block = {
+  		c: function create() {
+  			li = element("li");
+  			t = text(t_value);
+  			add_location(li, file$n, 19, 6, 553);
+  		},
+  		m: function mount(target, anchor) {
+  			insert_dev(target, li, anchor);
+  			append_dev(li, t);
+  		},
+  		p: function update(ctx, dirty) {
+  			if (dirty & /*$_inputs*/ 4 && t_value !== (t_value = keyLabel(/*key*/ ctx[4]) + "")) set_data_dev(t, t_value);
+  		},
+  		d: function destroy(detaching) {
+  			if (detaching) detach_dev(li);
+  		}
+  	};
+
+  	dispatch_dev("SvelteRegisterBlock", {
+  		block,
+  		id: create_each_block$4.name,
+  		type: "each",
+  		source: "(19:4) {#each $_inputs as key}",
+  		ctx
+  	});
+
+  	return block;
+  }
+
+  // (14:2) <span slot="content">
   function create_content_slot$5(ctx) {
   	let span;
+  	let t0;
+  	let t1;
+  	let ul;
+  	let current;
+
+  	const badge = new Badge({
+  			props: {
+  				color: "success",
+  				$$slots: { default: [create_default_slot_1$5] },
+  				$$scope: { ctx }
+  			},
+  			$$inline: true
+  		});
+
+  	let each_value = /*$_inputs*/ ctx[2];
+  	validate_each_argument(each_value);
+  	let each_blocks = [];
+
+  	for (let i = 0; i < each_value.length; i += 1) {
+  		each_blocks[i] = create_each_block$4(get_each_context$4(ctx, each_value, i));
+  	}
 
   	const block = {
   		c: function create() {
   			span = element("span");
-  			span.textContent = `This is the '${/*page*/ ctx[2].title}' page`;
+  			t0 = text("There are currently\n    ");
+  			create_component(badge.$$.fragment);
+  			t1 = text("\n    Input Variables as Possible X Axis candidates:\n  ");
+  			ul = element("ul");
+
+  			for (let i = 0; i < each_blocks.length; i += 1) {
+  				each_blocks[i].c();
+  			}
+
+  			add_location(ul, file$n, 17, 2, 514);
   			attr_dev(span, "slot", "content");
-  			add_location(span, file$n, 8, 2, 209);
+  			add_location(span, file$n, 13, 2, 362);
   		},
   		m: function mount(target, anchor) {
   			insert_dev(target, span, anchor);
+  			append_dev(span, t0);
+  			mount_component(badge, span, null);
+  			append_dev(span, t1);
+  			append_dev(span, ul);
+
+  			for (let i = 0; i < each_blocks.length; i += 1) {
+  				each_blocks[i].m(ul, null);
+  			}
+
+  			current = true;
   		},
-  		p: noop,
+  		p: function update(ctx, dirty) {
+  			const badge_changes = {};
+
+  			if (dirty & /*$$scope, $_inputs*/ 132) {
+  				badge_changes.$$scope = { dirty, ctx };
+  			}
+
+  			badge.$set(badge_changes);
+
+  			if (dirty & /*keyLabel, $_inputs*/ 4) {
+  				each_value = /*$_inputs*/ ctx[2];
+  				validate_each_argument(each_value);
+  				let i;
+
+  				for (i = 0; i < each_value.length; i += 1) {
+  					const child_ctx = get_each_context$4(ctx, each_value, i);
+
+  					if (each_blocks[i]) {
+  						each_blocks[i].p(child_ctx, dirty);
+  					} else {
+  						each_blocks[i] = create_each_block$4(child_ctx);
+  						each_blocks[i].c();
+  						each_blocks[i].m(ul, null);
+  					}
+  				}
+
+  				for (; i < each_blocks.length; i += 1) {
+  					each_blocks[i].d(1);
+  				}
+
+  				each_blocks.length = each_value.length;
+  			}
+  		},
+  		i: function intro(local) {
+  			if (current) return;
+  			transition_in(badge.$$.fragment, local);
+  			current = true;
+  		},
+  		o: function outro(local) {
+  			transition_out(badge.$$.fragment, local);
+  			current = false;
+  		},
   		d: function destroy(detaching) {
   			if (detaching) detach_dev(span);
+  			destroy_component(badge);
+  			destroy_each(each_blocks, detaching);
   		}
   	};
 
@@ -20477,14 +20769,14 @@ var app = (function () {
   		block,
   		id: create_content_slot$5.name,
   		type: "slot",
-  		source: "(9:2) <span slot=\\\"content\\\">",
+  		source: "(14:2) <span slot=\\\"content\\\">",
   		ctx
   	});
 
   	return block;
   }
 
-  // (7:0) <StandardPage {pages} {pageIndex}>
+  // (12:0) <StandardPage {pages} {pageIndex}>
   function create_default_slot$9(ctx) {
   	let t;
 
@@ -20496,6 +20788,8 @@ var app = (function () {
   			insert_dev(target, t, anchor);
   		},
   		p: noop,
+  		i: noop,
+  		o: noop,
   		d: function destroy(detaching) {
   			if (detaching) detach_dev(t);
   		}
@@ -20505,7 +20799,7 @@ var app = (function () {
   		block,
   		id: create_default_slot$9.name,
   		type: "slot",
-  		source: "(7:0) <StandardPage {pages} {pageIndex}>",
+  		source: "(12:0) <StandardPage {pages} {pageIndex}>",
   		ctx
   	});
 
@@ -20545,7 +20839,7 @@ var app = (function () {
   			if (dirty & /*pages*/ 1) standardpage_changes.pages = /*pages*/ ctx[0];
   			if (dirty & /*pageIndex*/ 2) standardpage_changes.pageIndex = /*pageIndex*/ ctx[1];
 
-  			if (dirty & /*$$scope*/ 8) {
+  			if (dirty & /*$$scope, $_inputs*/ 132) {
   				standardpage_changes.$$scope = { dirty, ctx };
   			}
 
@@ -20577,6 +20871,9 @@ var app = (function () {
   }
 
   function instance$n($$self, $$props, $$invalidate) {
+  	let $_inputs;
+  	validate_store(_inputs, "_inputs");
+  	component_subscribe($$self, _inputs, $$value => $$invalidate(2, $_inputs = $$value));
   	let { pages } = $$props, { pageIndex } = $$props;
   	let page = pages[pageIndex];
   	const writable_props = ["pages", "pageIndex"];
@@ -20593,19 +20890,28 @@ var app = (function () {
   		if ("pageIndex" in $$props) $$invalidate(1, pageIndex = $$props.pageIndex);
   	};
 
-  	$$self.$capture_state = () => ({ StandardPage, pages, pageIndex, page });
+  	$$self.$capture_state = () => ({
+  		_inputs,
+  		keyLabel,
+  		StandardPage,
+  		Badge,
+  		pages,
+  		pageIndex,
+  		page,
+  		$_inputs
+  	});
 
   	$$self.$inject_state = $$props => {
   		if ("pages" in $$props) $$invalidate(0, pages = $$props.pages);
   		if ("pageIndex" in $$props) $$invalidate(1, pageIndex = $$props.pageIndex);
-  		if ("page" in $$props) $$invalidate(2, page = $$props.page);
+  		if ("page" in $$props) $$invalidate(3, page = $$props.page);
   	};
 
   	if ($$props && "$$inject" in $$props) {
   		$$self.$inject_state($$props.$$inject);
   	}
 
-  	return [pages, pageIndex, page];
+  	return [pages, pageIndex, $_inputs, page];
   }
 
   class XVariable extends SvelteComponentDev {
@@ -20661,7 +20967,7 @@ var app = (function () {
   			span = element("span");
   			span.textContent = `${/*page*/ ctx[2].title}`;
   			attr_dev(span, "slot", "title");
-  			add_location(span, file$o, 11, 2, 313);
+  			add_location(span, file$o, 11, 2, 324);
   		},
   		m: function mount(target, anchor) {
   			insert_dev(target, span, anchor);
@@ -20702,7 +21008,7 @@ var app = (function () {
   			span = element("span");
   			if (switch_instance) create_component(switch_instance.$$.fragment);
   			attr_dev(span, "slot", "content");
-  			add_location(span, file$o, 12, 2, 354);
+  			add_location(span, file$o, 12, 2, 366);
   		},
   		m: function mount(target, anchor) {
   			insert_dev(target, span, anchor);

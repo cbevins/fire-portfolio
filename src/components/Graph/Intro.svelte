@@ -13,8 +13,9 @@
 <StandardPage {pages} {pageIndex}>
   <span slot="title">{page.title}</span>
   <span slot="content">
-    {#each varray as v, index}
+   {new Date()}
+    <!-- {#each varray as v, index}
       {index} {v.key}<br/>
-    {/each}
+    {/each} -->
   </span>
 </StandardPage>

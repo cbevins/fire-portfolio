@@ -2,7 +2,7 @@ export const getGraphPages = function () {
   return [
     {
       id: 'graphIntroPage',
-      title: 'Begin Graph',
+      title: 'BehavePlus Graph Builder',
       component: 'GraphIntro'
     }, {
       id: 'graphYVariablePage',
@@ -10,7 +10,7 @@ export const getGraphPages = function () {
       component: 'GraphYVariable'
     }, {
       id: 'graphModelConfigPage',
-      title: 'Configure Fire Modules',
+      title: 'Configure Fire Models',
       component: 'GraphModelConfig'
     }, {
       id: 'graphXVariablePage',
